@@ -10,12 +10,20 @@ import android.widget.Button;
 public class RegistrationPage extends AppCompatActivity {
 
     private Button Staff;
+    private Button Customer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_page);
-
+        Customer=(Button)findViewById(R.id.btn_CustomerHome);
         Staff = (Button)findViewById(R.id.StaffBtn);
+
+        Customer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCustomerHome();
+            }
+        });
 
         Staff.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -23,6 +31,11 @@ public class RegistrationPage extends AppCompatActivity {
                 openStaffHome();
             }
         });
+    }
+
+    public void openCustomerHome(){
+        Intent intent = new Intent(this,CustomerHome.class);
+        startActivity(intent);
     }
 
     public void openStaffHome(){
