@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Connecting all the above declaed variables to the ones on the layout
+        //Connecting all the above declared variables to the ones on the layout
         Name = (EditText)findViewById(R.id.etName);
         Password=(EditText)findViewById(R.id.etPassword);
         Login=(Button)findViewById(R.id.btn_Login);
