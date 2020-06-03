@@ -12,6 +12,7 @@ public class RegistrationPage extends AppCompatActivity {
 
     private Button Staff;
     private Button Customer;
+    private Button ConfirmRegis;
     private EditText Username;
     private EditText Password;
     private EditText reenterPassword;
@@ -23,7 +24,8 @@ public class RegistrationPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_page);
-
+        //for some reason the line below wont allow me to declare this damn button. not sure why
+//        ConfirmRegis=(Button)findViewById(R.id.btn_confirm);
         Password=findViewById(R.id.txt_password_regis);
         reenterPassword=findViewById(R.id.txt_reEnterPassword);
         Username=findViewById(R.id.txt_username_regis);
