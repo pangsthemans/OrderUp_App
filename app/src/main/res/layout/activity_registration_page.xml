@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".RegistrationPage"
     android:background="@drawable/gradient_background">
-
+    
     <Button
         android:id="@+id/StaffBtn"
         android:layout_width="wrap_content"
@@ -49,6 +49,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Password"
+
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
