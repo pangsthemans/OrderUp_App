@@ -33,6 +33,7 @@ public class RegistrationPage extends AppCompatActivity {
 //    private ProgressBar loading;
     private EditText reenterPassword;
     private EditText emailAd;
+//    private EditText name;
     private static String URL_REGIST="https://lamp.ms.wits.ac.za/home/s2039033/register.php";
 
 
@@ -82,9 +83,10 @@ public class RegistrationPage extends AppCompatActivity {
 //        loading.setVisibility(View.VISIBLE);
         ConfirmRegis.setVisibility(View.GONE);
 
-        final String name = this.Username.getText().toString().trim();
+        final String username = this.Username.getText().toString().trim();
         final String password = this.Password.getText().toString().trim();
         final String email = this.emailAd.getText().toString().trim();
+
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGIST,
                 new Response.Listener<String>() {
@@ -116,10 +118,10 @@ public class RegistrationPage extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params= new HashMap<>();
-                params.put("name",name);
+                params.put("username",username);
                 params.put("email",email);
                 params.put("password",password);
-                return params;
+                return super.getParams();
 
             }
         };
