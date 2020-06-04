@@ -34,11 +34,21 @@ public class MainActivity extends AppCompatActivity {
                 openRegistrationPage();
             }
         });
+
+        Login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String username = Name.getText().toString();
+                final String password = Password.getText().toString();
+            }
+        } );
     }
     public void openRegistrationPage(){
         Intent intent = new Intent(this,RegistrationPage.class);
         startActivity(intent);
     }
+
+
 
 
 

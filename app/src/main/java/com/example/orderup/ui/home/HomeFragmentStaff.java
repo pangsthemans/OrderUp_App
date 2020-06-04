@@ -30,6 +30,8 @@ public class HomeFragmentStaff extends Fragment {
                 textView.setText(s);
             }
         });
+
+
         return root;
     }
 }
