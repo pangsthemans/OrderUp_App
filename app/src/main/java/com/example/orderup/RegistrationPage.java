@@ -48,14 +48,18 @@ public class RegistrationPage extends AppCompatActivity {
         emailAd=findViewById(R.id.txt_email);
         reenterPassword=findViewById(R.id.txt_reEnterPassword);
         Username=findViewById(R.id.txt_username_regis);
-
         Customer= findViewById(R.id.btn_CustomerHome);
         Staff = findViewById(R.id.StaffBtn);
 
         ConfirmRegis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!reenterPassword.getText().toString().trim().equals(Password.getText().toString().trim())){
+                    Toast.makeText(RegistrationPage.this,"Please make sure passwords match",Toast.LENGTH_SHORT).show();
+                }
+                else{
                 Regist();
+                }
             }
         });
 
