@@ -22,6 +22,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String COLUMN_NAME = "Name";
     private static final String COLUMN_EMAIL = "Email";
     private static final String COLUMN_PASSWORD = "Password";
+    private static final String COLUMN_TYPE = "User_type";
 
     SQLiteDatabase database;
 
@@ -31,7 +32,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + " (" + COLUMNN_ID + " AUTO_INCREMENT PRIMARY KEY, " + COLUMN_NAME+" TEXT," + COLUMN_EMAIL + " TEXT," + COLUMN_PASSWORD + "TEXT)");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + " (" + COLUMNN_ID + " AUTO_INCREMENT PRIMARY KEY, " + COLUMN_NAME+" TEXT," + COLUMN_EMAIL + " TEXT," + COLUMN_PASSWORD + "TEXT," + COLUMN_TYPE + "INTEGER)");
     }
 
     @Override
