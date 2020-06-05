@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         Login=(Button)findViewById(R.id.btn_Login);
         Register=(Button)findViewById(R.id.btn_register);
 
+        DatabaseHandler databaseHandler = new DatabaseHandler(this);
+
 
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
