@@ -9,12 +9,12 @@
 
 
     <EditText
-        android:id="@+id/etName"
+        android:id="@+id/txt_email"
         android:layout_width="282dp"
         android:layout_height="51dp"
         android:background="@drawable/edittext_style"
         android:ems="10"
-        android:hint="Name"
+        android:hint="Email"
         android:inputType="textPersonName"
         android:padding="10dp"
         android:textColor="#FFFFFF"
