@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -27,13 +28,15 @@ public class RegistrationPage extends AppCompatActivity {
 
     private Button Staff;
     private Button Customer;
+    private RadioButton StaffRadio;
+    private RadioButton CustRadio;
     private Button ConfirmRegis;
     private EditText Username;
     private EditText Password;
 //    private ProgressBar loading;
     private EditText reenterPassword;
     private EditText emailAd;
-//    private EditText name;
+    DatabaseHandler DatabaseHandler;
     private static String URL_REGIST="https://lamp.ms.wits.ac.za/home/s2039033/register.php";
 
 
@@ -50,15 +53,56 @@ public class RegistrationPage extends AppCompatActivity {
         Username=findViewById(R.id.txt_username_regis);
         Customer= findViewById(R.id.btn_CustomerHome);
         Staff = findViewById(R.id.StaffBtn);
+        StaffRadio = findViewById(R.id.radioStaff);
+        CustRadio = findViewById(R.id.radioCustomer);
+        DatabaseHandler = new DatabaseHandler(this);
+
+        //Code to make sure that only Customer or Staff is selected
+        StaffRadio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(StaffRadio.isChecked()){
+                    CustRadio.setChecked(false);
+                }
+            }
+        });
+
+        CustRadio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(CustRadio.isChecked()){
+                    StaffRadio.setChecked(false);
+                }
+            }
+        });
 
         ConfirmRegis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 if (!reenterPassword.getText().toString().trim().equals(Password.getText().toString().trim())){
                     Toast.makeText(RegistrationPage.this,"Please make sure passwords match",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                Regist();
+                    //Get the data for the text fields and validate ID
+                    String name = Username.getText().toString();
+                    String password = Password.getText().toString();
+                    String email = emailAd.getText().toString();
+                    int  id = CustomerOrStaff();
+                    if(id != -1){
+                        AddLocalData(name, password, email, id);
+                        Regist();
+                        if(id == 0){
+                            openStaffHome();
+                        }
+                        else{
+                            openCustomerHome();
+                        }
+                    }
+                    else{
+                        Toast.makeText(RegistrationPage.this, "Please select Customer or Staff", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -76,13 +120,28 @@ public class RegistrationPage extends AppCompatActivity {
                 openStaffHome();
             }
         });
+    }// end of onCreate method
+
+    //Below are methods we use to get data and place it in the databases
+    public void AddLocalData(String name, String email, String Password, int id){
+        boolean insertData = DatabaseHandler.addData(name, email, Password, id);
+
+        if(insertData){
+            Toast.makeText(this, "Successfully Registered", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+        }
     }
 
+
+    //method to open customer home page activity
     public void openCustomerHome(){
         Intent intent = new Intent(this,CustomerHome.class);
         startActivity(intent);
     }
 
+    //method to add users to the MySQL databse on lamp server
     public void Regist(){
 //        loading.setVisibility(View.VISIBLE);
         ConfirmRegis.setVisibility(View.GONE);
@@ -132,9 +191,23 @@ public class RegistrationPage extends AppCompatActivity {
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
-
+    //Open staff home page activity
     public void openStaffHome(){
         Intent intent = new Intent(this,StaffHome.class);
         startActivity(intent);
     }
+
+    //Function to check which button selected by User
+    public int CustomerOrStaff(){
+        if(StaffRadio.isChecked() &&  !CustRadio.isChecked()){
+            return 0;
+        }
+        if(CustRadio.isChecked() && !StaffRadio.isChecked()){
+            return 1;
+        }
+        else{
+            return -1;
+        }
+    }
+
 }
