@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
                 if (!email.isEmpty() || !password.isEmpty()){
                     Login(email,password);
                 }else{
-                    Email.setError("Please enter A valid Email");
-                    Password.setError("Please enter A valid Password");
+                    Email.setError("Please Enter A Valid Email");
+                    Password.setError("Please Enter A Valid Password");
                 }
             }
         } );
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String success= jsonObject.getString("success");
-                            JSONArray jsonArray=jsonObject.getJSONArray("Login");
+                            JSONArray jsonArray=jsonObject.getJSONArray("login");
                             if(success.equals("1")){
                                 for(int i=0;i<jsonArray.length();i++){
                                     JSONObject object=jsonArray.getJSONObject(i);
