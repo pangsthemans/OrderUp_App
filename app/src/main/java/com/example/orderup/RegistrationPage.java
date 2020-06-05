@@ -90,6 +90,7 @@ public class RegistrationPage extends AppCompatActivity {
                     String password = Password.getText().toString();
                     String email = emailAd.getText().toString();
                     int  id = CustomerOrStaff();
+                    //adds the user to the local data base
                     if(id != -1){
                         AddLocalData(name, password, email, id);
                         Regist();
