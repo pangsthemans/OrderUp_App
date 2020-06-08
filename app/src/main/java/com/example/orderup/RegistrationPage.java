@@ -150,6 +150,7 @@ public class RegistrationPage extends AppCompatActivity {
         final String username = this.Username.getText().toString().trim();
         final String password = this.Password.getText().toString().trim();
         final String email = this.emailAd.getText().toString().trim();
+        final int usertype = CustomerOrStaff();
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGIST,
@@ -182,9 +183,10 @@ public class RegistrationPage extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params= new HashMap<>();
-                params.put("CUS_USERNAME",username);
-                params.put("CUS_EMAIL",email);
-                params.put("CUS_PASSWORD",password);
+                params.put("USER_USERNAME",username);
+                params.put("USER_EMAIL",email);
+                params.put("USER_PASSWORD",password);
+                params.put("USER_TYPE", Integer.toString(usertype));
                 return params;
 
             }
