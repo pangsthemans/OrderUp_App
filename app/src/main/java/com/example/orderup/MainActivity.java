@@ -84,14 +84,14 @@ public class MainActivity extends AppCompatActivity {
                             if(success.equals("1")){
                                 for(int i=0;i<jsonArray.length();i++){
                                     JSONObject object=jsonArray.getJSONObject(i);
-                                    String username=object.getString("CUS_USERNAME").trim();
-                                    String email=object.getString("CUS_EMAIL").trim();
-                                    String usertype=object.getString("CUS_TYPE").trim();
+                                    String username=object.getString("USER_USERNAME").trim();
+                                    String email=object.getString("USER_EMAIL").trim();
+                                    String usertype=object.getString("USER_TYPE").trim();
                                     if (usertype.equals("Customer")){
                                         Intent intent = new Intent(MainActivity.this,CustomerHome.class);
                                         startActivity(intent);
                                     }
-                                    else{
+                                    else if(usertype.equals("Staff")){
                                         Intent intent = new Intent(MainActivity.this,StaffHome.class);
                                         startActivity(intent);
                                     }
@@ -121,8 +121,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params=new HashMap<>();
-                params.put("CUS_EMAIL",email);
-                params.put("CUS_PASSWORD",password);
+                params.put("USER_EMAIL",email);
+                params.put("USER_PASSWORD",password);
                 return params;
             }
         };
