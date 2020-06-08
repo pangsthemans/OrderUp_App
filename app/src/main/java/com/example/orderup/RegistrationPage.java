@@ -95,7 +95,7 @@ public class RegistrationPage extends AppCompatActivity {
                         AddLocalData(name, password, email, id);
                         Regist();
                         if(id == 0){
-                            openStaffHome();
+                            openStaffHome(name, email);
                         }
                         else{
                             openCustomerHome();
@@ -118,7 +118,7 @@ public class RegistrationPage extends AppCompatActivity {
         Staff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openStaffHome();
+                openStaffHome("admin","admin");
             }
         });
     }// end of onCreate method
@@ -193,8 +193,10 @@ public class RegistrationPage extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
     //Open staff home page activity
-    public void openStaffHome(){
+    public void openStaffHome(String name, String email){
         Intent intent = new Intent(this,StaffHome.class);
+        intent.putExtra("username", name);
+        intent.putExtra("user_email", email);
         startActivity(intent);
     }
 
