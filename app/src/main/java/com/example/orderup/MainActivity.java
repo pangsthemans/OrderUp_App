@@ -93,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     else if(usertype.equals("Staff")){
                                         Intent intent = new Intent(MainActivity.this,StaffHome.class);
+                                        intent.putExtra("username", username);
+                                        intent.putExtra("user_email", email);
                                         startActivity(intent);
                                     }
 
