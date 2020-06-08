@@ -1,14 +1,18 @@
 package com.example.orderup;
 
+import android.content.ClipData;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -20,11 +24,11 @@ import androidx.appcompat.widget.Toolbar;
 public class StaffHome extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-
+    private MenuItem logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        logout=findViewById(R.id.action_logout);
         setContentView(R.layout.activity_staff_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -55,6 +59,21 @@ public class StaffHome extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.staff_home, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.action_logout:
+                Toast.makeText(this,"Goodbye",Toast.LENGTH_SHORT).show();
+                finish();
+                return true;
+            case R.id.action_settings:
+                Toast.makeText(this,"This is the settings",Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

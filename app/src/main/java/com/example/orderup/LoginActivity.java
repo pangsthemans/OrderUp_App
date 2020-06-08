@@ -21,12 +21,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     //Using name to login for now but i mean we can always change that
     private EditText Email;
     private EditText Password;
@@ -88,19 +87,19 @@ public class MainActivity extends AppCompatActivity {
                                     String email=object.getString("USER_EMAIL").trim();
                                     String usertype=object.getString("USER_TYPE").trim();
                                     if (usertype.equals("Customer")){
-                                        Intent intent = new Intent(MainActivity.this,CustomerHome.class);
+                                        Intent intent = new Intent(LoginActivity.this,CustomerHome.class);
                                         intent.putExtra("username",username);
                                         intent.putExtra("user_email",email);
                                         startActivity(intent);
                                     }
                                     else if(usertype.equals("Staff")){
-                                        Intent intent = new Intent(MainActivity.this,StaffHome.class);
+                                        Intent intent = new Intent(LoginActivity.this,StaffHome.class);
                                         intent.putExtra("username",username);
                                         intent.putExtra("user_email",email);
                                         startActivity(intent);
                                     }
 
-                                    Toast.makeText(MainActivity.this,
+                                    Toast.makeText(LoginActivity.this,
                                             "Successful Login. \nYour Name : "
                                                     +username+"\nYour Email :"+
                                                     email,Toast.LENGTH_SHORT).show();
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Login_button.setVisibility(View.VISIBLE);
-                            Toast.makeText(MainActivity.this,"Error "+e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,"Error "+e.toString(),Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
@@ -117,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Login_button.setVisibility(View.VISIBLE);
-                        Toast.makeText(MainActivity.this,"Error "+error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this,"Error "+error.toString(),Toast.LENGTH_SHORT).show();
 
                     }
                 })
