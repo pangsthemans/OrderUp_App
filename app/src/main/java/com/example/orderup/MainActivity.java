@@ -86,6 +86,15 @@ public class MainActivity extends AppCompatActivity {
                                     JSONObject object=jsonArray.getJSONObject(i);
                                     String username=object.getString("CUS_USERNAME").trim();
                                     String email=object.getString("CUS_EMAIL").trim();
+                                    String usertype=object.getString("CUS_TYPE").trim();
+                                    if (usertype.equals("Customer")){
+                                        Intent intent = new Intent(MainActivity.this,CustomerHome.class);
+                                        startActivity(intent);
+                                    }
+                                    else{
+                                        Intent intent = new Intent(MainActivity.this,StaffHome.class);
+                                        startActivity(intent);
+                                    }
 
                                     Toast.makeText(MainActivity.this,
                                             "Successful Login. \nYour Name : "
@@ -125,15 +134,4 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,RegistrationPage.class);
         startActivity(intent);
     }
-
-
-
-
-
-    //this function will essentially check if the password matches the one in the database
-    private void validatePassword(String userName, String userPassword){
-
-    }
-
-
 }
