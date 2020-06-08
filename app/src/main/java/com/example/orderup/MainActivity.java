@@ -89,10 +89,14 @@ public class MainActivity extends AppCompatActivity {
                                     String usertype=object.getString("USER_TYPE").trim();
                                     if (usertype.equals("Customer")){
                                         Intent intent = new Intent(MainActivity.this,CustomerHome.class);
+                                        intent.putExtra("username",username);
+                                        intent.putExtra("user_email",email);
                                         startActivity(intent);
                                     }
                                     else if(usertype.equals("Staff")){
                                         Intent intent = new Intent(MainActivity.this,StaffHome.class);
+                                        intent.putExtra("username",username);
+                                        intent.putExtra("user_email",email);
                                         startActivity(intent);
                                     }
 
