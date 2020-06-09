@@ -1,6 +1,7 @@
 package com.example.orderup;
 
 import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +23,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class StaffHome extends AppCompatActivity {
+//    private TextView name,email;
+
 
     private AppBarConfiguration mAppBarConfiguration;
     private MenuItem logout;
@@ -29,6 +32,18 @@ public class StaffHome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         logout=findViewById(R.id.action_logout);
+//        name=findViewById(R.id.welcomename);
+//        email=findViewById(R.id.welcomeemail);
+//
+//
+//        Intent intent=getIntent();
+//        String extraName= intent.getStringExtra("username");
+//        String extraEmail=intent.getStringExtra("user_email");
+//
+//        name.setText(extraName);
+//        email.setText(extraEmail);
+//
+
         setContentView(R.layout.activity_staff_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
