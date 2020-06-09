@@ -98,7 +98,7 @@ public class RegistrationPage extends AppCompatActivity {
                             openStaffHome(name, email);
                         }
                         else{
-                            openCustomerHome();
+                            openCustomerHome(name, email);
                         }
                     }
                     else{
@@ -111,14 +111,14 @@ public class RegistrationPage extends AppCompatActivity {
         Customer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openCustomerHome();
+                openCustomerHome("Customer","admin@gmail.com");
             }
         });
 
         Staff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openStaffHome("admin","admin");
+                openStaffHome("Staff","admin@gmail.com");
             }
         });
     }// end of onCreate method
@@ -137,8 +137,10 @@ public class RegistrationPage extends AppCompatActivity {
 
 
     //method to open customer home page activity
-    public void openCustomerHome(){
+    public void openCustomerHome(String name, String email){
         Intent intent = new Intent(this,CustomerHome.class);
+        intent.putExtra("username", name);
+        intent.putExtra("user_email", email);
         startActivity(intent);
     }
 
