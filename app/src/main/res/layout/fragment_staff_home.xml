@@ -32,12 +32,13 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="256dp"
+        android:layout_height="33dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/order_list"
-        app:layout_constraintVertical_bias="0.364"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintVertical_bias="0.364" />
 
     <!--    <TextView-->
     <!--        android:id="@+id/textView"-->
