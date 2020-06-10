@@ -1,50 +1,85 @@
 package com.example.orderup;
 
-import android.content.ClipData;
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Menu;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
-
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import okhttp3.OkHttpClient;
+import okhttp3.*;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import okhttp3.OkHttpClient;
 
 public class StaffHome extends AppCompatActivity {
-//    private TextView name,email;
 
-
+    ArrayList<String> listofrestaurants = new ArrayList<>();
+    ArrayList<String> list=new ArrayList<>();
+    ArrayAdapter<String> adapter;
     private AppBarConfiguration mAppBarConfiguration;
     private MenuItem logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_staff_home);
+        Spinner sp =(Spinner) findViewById(R.id.spinner);
+        adapter=new ArrayAdapter<String>(this,R.layout.spinner_layout,R.id.txt,listofrestaurants);
+        sp.setAdapter(adapter);
         logout=findViewById(R.id.action_logout);
-//        name=findViewById(R.id.welcomename);
-//        email=findViewById(R.id.welcomeemail);
-//
-//
-//        Intent intent=getIntent();
-//        String extraName= intent.getStringExtra("username");
-//        String extraEmail=intent.getStringExtra("user_email");
-//
-//        name.setText(extraName);
-//        email.setText(extraEmail);
-//
 
-        setContentView(R.layout.activity_staff_home);
+//        testinggetinfo=findViewById(R.id.text_testdisp);
+        String url="https://lamp.ms.wits.ac.za/home/s2039033/getrest.php";
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            processJSON(response);
+                            listofrestaurants.addAll(list);
+                            adapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        RequestQueue requestQueue= Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+
+                setContentView(R.layout.activity_staff_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -112,5 +147,14 @@ public class StaffHome extends AppCompatActivity {
         navEmail.setText(email);
 
 
+    }
+    public void processJSON(String json) throws JSONException {
+        JSONArray ja = new JSONArray(json);
+        for(int i=0;i<ja.length();i++){
+            JSONObject jo=ja.getJSONObject(i);
+            String id=jo.getString("REST_ID");
+            String name=jo.getString("REST_NAME");
+            list.add(name);
+        }
     }
 }
