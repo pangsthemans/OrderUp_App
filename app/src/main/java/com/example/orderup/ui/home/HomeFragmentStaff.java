@@ -1,6 +1,7 @@
 package com.example.orderup.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,8 +33,10 @@ import java.util.ArrayList;
 public class HomeFragmentStaff extends Fragment {
 
     private HomeViewModel homeViewModel;
-    ArrayList<String> listofrestaurants = new ArrayList<>();
-    ArrayAdapter<String> adapter;
+    ArrayList<String> listofrestaurants;
+    ArrayList<String> list = new ArrayList<>();
+    ArrayAdapter<String> dataAdapter;
+    Spinner sp;
     String url="https://lamp.ms.wits.ac.za/home/s2039033/getrest.php";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -49,13 +52,23 @@ public class HomeFragmentStaff extends Fragment {
             }
         });
 
+        listofrestaurants = new ArrayList<>();
+        sp = root.findViewById(R.id.spinner);
+        populateSpinner();
+
+        return root;
+    }
+
+    public void populateSpinner(){
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             processJSON(response);
-                        } catch (JSONException e) {
+                        }
+
+                        catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
@@ -69,11 +82,6 @@ public class HomeFragmentStaff extends Fragment {
         requestQueue.add(stringRequest);
 
 
-        Spinner sp = root.findViewById(R.id.spinner);
-
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this.getActivity(),R.layout.spinner_layout,listofrestaurants);
-        sp.setAdapter(dataAdapter);
-        return root;
     }
 
     public void processJSON(String json) throws JSONException {
@@ -83,5 +91,10 @@ public class HomeFragmentStaff extends Fragment {
             String name=jo.getString("REST_NAME");
             listofrestaurants.add(name);
         }
+        listofrestaurants.add(0, "Restaurants");
+
+        dataAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item,listofrestaurants);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp.setAdapter(dataAdapter);
     }
 }
