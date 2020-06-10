@@ -1,6 +1,7 @@
 package com.example.orderup;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +34,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import okhttp3.OkHttpClient;
 
@@ -57,8 +58,9 @@ public class StaffHome extends AppCompatActivity {
         String url="https://lamp.ms.wits.ac.za/home/s2039033/getrest.php";
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
+
                     @Override
                     public void onResponse(String response) {
                         try {
@@ -152,9 +154,9 @@ public class StaffHome extends AppCompatActivity {
         JSONArray ja = new JSONArray(json);
         for(int i=0;i<ja.length();i++){
             JSONObject jo=ja.getJSONObject(i);
-            String id=jo.getString("REST_ID");
-            String name=jo.getString("REST_NAME");
-            list.add(name);
+//            String id=jo.getString("REST_ID");
+//            String name=jo.getString("REST_NAME");
+            list.add(jo.getString("REST_NAME"));
         }
     }
 }
