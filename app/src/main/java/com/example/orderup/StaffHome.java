@@ -1,6 +1,7 @@
 package com.example.orderup;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,9 +40,6 @@ import okhttp3.OkHttpClient;
 
 public class StaffHome extends AppCompatActivity {
 
-    ArrayList<String> listofrestaurants = new ArrayList<>();
-    ArrayList<String> list=new ArrayList<>();
-    ArrayAdapter<String> adapter;
     private AppBarConfiguration mAppBarConfiguration;
     private MenuItem logout;
     @Override
@@ -49,37 +47,13 @@ public class StaffHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_staff_home);
         Spinner sp =(Spinner) findViewById(R.id.spinner);
-        adapter=new ArrayAdapter<String>(this,R.layout.spinner_layout,R.id.txt,listofrestaurants);
-        sp.setAdapter(adapter);
         logout=findViewById(R.id.action_logout);
 
 //        testinggetinfo=findViewById(R.id.text_testdisp);
         String url="https://lamp.ms.wits.ac.za/home/s2039033/getrest.php";
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            processJSON(response);
-                            listofrestaurants.addAll(list);
-                            adapter.notifyDataSetChanged();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        RequestQueue requestQueue= Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-
-
-                setContentView(R.layout.activity_staff_home);
+        setContentView(R.layout.activity_staff_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -92,6 +66,8 @@ public class StaffHome extends AppCompatActivity {
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+
         updateNavHeader();
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -147,14 +123,5 @@ public class StaffHome extends AppCompatActivity {
         navEmail.setText(email);
 
 
-    }
-    public void processJSON(String json) throws JSONException {
-        JSONArray ja = new JSONArray(json);
-        for(int i=0;i<ja.length();i++){
-            JSONObject jo=ja.getJSONObject(i);
-            String id=jo.getString("REST_ID");
-            String name=jo.getString("REST_NAME");
-            list.add(name);
-        }
     }
 }
