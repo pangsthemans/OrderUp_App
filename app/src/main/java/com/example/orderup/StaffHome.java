@@ -50,7 +50,7 @@ public class StaffHome extends AppCompatActivity {
         logout=findViewById(R.id.action_logout);
 
 //        testinggetinfo=findViewById(R.id.text_testdisp);
-        String url="https://lamp.ms.wits.ac.za/home/s2039033/getrest.php";
+        String url="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/getrest.php";
 
 
         setContentView(R.layout.activity_staff_home);

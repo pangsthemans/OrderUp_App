@@ -37,7 +37,7 @@ public class RegistrationPage extends AppCompatActivity {
     private EditText reenterPassword;
     private EditText emailAd;
     DatabaseHandler DatabaseHandler;
-    private static String URL_REGIST="https://lamp.ms.wits.ac.za/home/s2039033/register.php";
+    private static String URL_REGIST="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/register.php";
 
 
 
@@ -165,6 +165,9 @@ public class RegistrationPage extends AppCompatActivity {
 
                             if (success.equals("1")){
                                 Toast.makeText(RegistrationPage.this,"Register Success!",Toast.LENGTH_SHORT).show();
+                            }
+                            else if(success.equals("User Already Exists")){
+                                Toast.makeText(RegistrationPage.this,"Registratino Failure!\n User Already Exists",Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

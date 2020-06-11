@@ -26,12 +26,11 @@ import java.util.Map;
 
 
 public class LoginActivity extends AppCompatActivity {
-    //Using name to login for now but i mean we can always change that
     private EditText Email;
     private EditText Password;
     private Button Login_button;
     private Button Register;
-    private static String URL_LOGIN="https://lamp.ms.wits.ac.za/home/s2039033/login.php";
+    private static String URL_LOGIN="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/login.php";
 
 
     @Override
@@ -105,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
                                                     email,Toast.LENGTH_SHORT).show();
                                 }
                             }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Login_button.setVisibility(View.VISIBLE);
