@@ -81,8 +81,17 @@ public class RegistrationPage extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                if (!reenterPassword.getText().toString().trim().equals(Password.getText().toString().trim())){
-                    Toast.makeText(RegistrationPage.this,"Please make sure passwords match",Toast.LENGTH_SHORT).show();
+                if (!reenterPassword.getText().toString().trim().equals(Password.getText().toString().trim())) {
+                    Toast.makeText(RegistrationPage.this, "Please make sure passwords match", Toast.LENGTH_SHORT).show();
+                }
+                else if(Password.getText().toString().trim().isEmpty()){
+                    Password.setError("Please Enter a Password");
+                }
+                else if(emailAd.getText().toString().trim().isEmpty()){
+                    emailAd.setError("Please enter a Email");
+                }
+                else if(Username.getText().toString().trim().isEmpty()){
+                    Username.setError("Please enter a Username");
                 }
                 else{
                     //Get the data for the text fields and validate ID
@@ -92,14 +101,15 @@ public class RegistrationPage extends AppCompatActivity {
                     int  id = CustomerOrStaff();
                     //adds the user to the local data base
                     if(id != -1){
-                        AddLocalData(name, password, email, id);
                         Regist();
-                        if(id == 0){
-                            openStaffHome(name, email);
-                        }
-                        else{
-                            openCustomerHome(name, email);
-                        }
+
+//                        AddLocalData(name, password, email, id);
+//                        if(id == 0){
+//                            openStaffHome(name, email);
+//                        }
+//                        else{
+//                            openCustomerHome(name, email);
+//                        }
                     }
                     else{
                         Toast.makeText(RegistrationPage.this, "Please select Customer or Staff", Toast.LENGTH_SHORT).show();
@@ -162,18 +172,29 @@ public class RegistrationPage extends AppCompatActivity {
                         try{
                             JSONObject jsonObject=new JSONObject(response);
                             String success= jsonObject.getString("success");
-
+                            String message=jsonObject.getString("message");
                             if (success.equals("1")){
                                 Toast.makeText(RegistrationPage.this,"Register Success!",Toast.LENGTH_SHORT).show();
+                                String name = Username.getText().toString().trim();
+                                String password = Password.getText().toString().trim();
+                                String email = emailAd.getText().toString().trim();
+                                int  id = CustomerOrStaff();
+                                AddLocalData(name, password, email, id);
+                                if(id == 0){
+                                    openStaffHome(name, email);
+                                }
+                                else{
+                                    openCustomerHome(name, email);
+                                }
                             }
-                            else if(success.equals("User Already Exists")){
-                                Toast.makeText(RegistrationPage.this,"Registratino Failure!\n User Already Exists",Toast.LENGTH_SHORT).show();
+                            else if(success.equals("0") && message.equals("User Already Exists")){
+                                Toast.makeText(RegistrationPage.this,"Registration Failure!\n User Already Exists",Toast.LENGTH_SHORT).show();
+                                ConfirmRegis.setVisibility(View.VISIBLE);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(RegistrationPage.this,"Register Error!"+e.toString(),Toast.LENGTH_SHORT).show();
 //                            loading.setVisibility(View.GONE);
-                            ConfirmRegis.setVisibility(View.VISIBLE);
                         }
                     }
                 }, new Response.ErrorListener() {

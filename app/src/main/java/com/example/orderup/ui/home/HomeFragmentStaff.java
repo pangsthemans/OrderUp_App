@@ -37,7 +37,7 @@ public class HomeFragmentStaff extends Fragment {
     ArrayList<String> list = new ArrayList<>();
     ArrayAdapter<String> dataAdapter;
     Spinner sp;
-    String url="https://lamp.ms.wits.ac.za/home/s2039033/getrest.php";
+    String url="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/getrest.php";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
