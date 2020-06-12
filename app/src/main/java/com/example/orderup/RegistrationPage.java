@@ -36,7 +36,6 @@ public class RegistrationPage extends AppCompatActivity {
 //    private ProgressBar loading;
     private EditText reenterPassword;
     private EditText emailAd;
-    DatabaseHandler DatabaseHandler;
     private static String URL_REGIST="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/register.php";
 
 
@@ -55,7 +54,6 @@ public class RegistrationPage extends AppCompatActivity {
         Staff = findViewById(R.id.StaffBtn);
         StaffRadio = findViewById(R.id.radioStaff);
         CustRadio = findViewById(R.id.radioCustomer);
-        DatabaseHandler = new DatabaseHandler(this);
 
         //Code to make sure that only Customer or Staff is selected
         StaffRadio.setOnClickListener(new View.OnClickListener() {
@@ -94,22 +92,11 @@ public class RegistrationPage extends AppCompatActivity {
                     Username.setError("Please enter a Username");
                 }
                 else{
-                    //Get the data for the text fields and validate ID
-                    String name = Username.getText().toString();
-                    String password = Password.getText().toString();
-                    String email = emailAd.getText().toString();
+                    //validates that an id was chosen
                     int  id = CustomerOrStaff();
-                    //adds the user to the local data base
+                    //adds the user to the data base
                     if(id != -1){
                         Regist();
-
-//                        AddLocalData(name, password, email, id);
-//                        if(id == 0){
-//                            openStaffHome(name, email);
-//                        }
-//                        else{
-//                            openCustomerHome(name, email);
-//                        }
                     }
                     else{
                         Toast.makeText(RegistrationPage.this, "Please select Customer or Staff", Toast.LENGTH_SHORT).show();
@@ -133,17 +120,7 @@ public class RegistrationPage extends AppCompatActivity {
         });
     }// end of onCreate method
 
-    //Below are methods we use to get data and place it in the databases
-    public void AddLocalData(String name, String email, String Password, int id){
-        boolean insertData = DatabaseHandler.addData(name, email, Password, id);
 
-        if(insertData){
-            Toast.makeText(this, "Successfully Registered", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
-        }
-    }
 
 
     //method to open customer home page activity
@@ -179,7 +156,6 @@ public class RegistrationPage extends AppCompatActivity {
                                 String password = Password.getText().toString().trim();
                                 String email = emailAd.getText().toString().trim();
                                 int  id = CustomerOrStaff();
-                                AddLocalData(name, password, email, id);
                                 if(id == 0){
                                     openStaffHome(name, email);
                                 }

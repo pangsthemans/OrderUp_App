@@ -43,8 +43,6 @@ public class LoginActivity extends AppCompatActivity {
         Login_button=(Button)findViewById(R.id.btn_Login);
         Register=(Button)findViewById(R.id.btn_register);
 
-        DatabaseHandler databaseHandler = new DatabaseHandler(this);
-
 
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
