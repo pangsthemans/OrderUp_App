@@ -34,10 +34,16 @@ public class HomeFragmentStaff extends Fragment {
 
     private HomeViewModel homeViewModel;
     ArrayList<String> listofrestaurants;
-    ArrayList<String> list = new ArrayList<>();
+//    ArrayList<String> list = new ArrayList<>();
+    ArrayList<String> listofcustomers;
+//    ArrayList<String> listcust=new ArrayList<>();
     ArrayAdapter<String> dataAdapter;
+    ArrayAdapter<String> dataCustAdapter;
+    Spinner spCus;
     Spinner sp;
-    String url="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/getrest.php";
+    String urlrestaurants="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/getrest.php";
+    String urlcust="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/CUSTOMERS.php";
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -53,14 +59,38 @@ public class HomeFragmentStaff extends Fragment {
         });
 
         listofrestaurants = new ArrayList<>();
+        listofcustomers=new ArrayList<>();
         sp = root.findViewById(R.id.spinner);
+        spCus=root.findViewById(R.id.cust_spinner);
         populateSpinner();
-
+        populateSpinnerCus();
         return root;
+    }
+    public void populateSpinnerCus(){
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, urlcust,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            processJSONCustomers(response);
+                        }
+
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        RequestQueue requestQueue= Volley.newRequestQueue(this.getActivity());
+        requestQueue.add(stringRequest);
     }
 
     public void populateSpinner(){
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, urlrestaurants,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -80,8 +110,6 @@ public class HomeFragmentStaff extends Fragment {
         });
         RequestQueue requestQueue= Volley.newRequestQueue(this.getActivity());
         requestQueue.add(stringRequest);
-
-
     }
 
     public void processJSON(String json) throws JSONException {
@@ -96,5 +124,18 @@ public class HomeFragmentStaff extends Fragment {
         dataAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item,listofrestaurants);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp.setAdapter(dataAdapter);
+    }
+    public void processJSONCustomers(String json) throws JSONException{
+        JSONArray ja = new JSONArray(json);
+        for(int i=0;i<ja.length();i++){
+            JSONObject jo=ja.getJSONObject(i);
+            String name=jo.getString("USER_USERNAME");
+            String id=jo.getString("USER_ID");
+            listofcustomers.add(id+" : "+name);
+        }
+        listofcustomers.add(0, "Customers");
+        dataCustAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item,listofcustomers);
+        dataCustAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spCus.setAdapter(dataCustAdapter);
     }
 }

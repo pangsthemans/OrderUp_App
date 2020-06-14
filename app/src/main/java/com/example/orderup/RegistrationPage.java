@@ -77,8 +77,6 @@ public class RegistrationPage extends AppCompatActivity {
         ConfirmRegis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 if (!reenterPassword.getText().toString().trim().equals(Password.getText().toString().trim())) {
                     Toast.makeText(RegistrationPage.this, "Please make sure passwords match", Toast.LENGTH_SHORT).show();
                 }
@@ -86,10 +84,10 @@ public class RegistrationPage extends AppCompatActivity {
                     Password.setError("Please Enter a Password");
                 }
                 else if(emailAd.getText().toString().trim().isEmpty()){
-                    emailAd.setError("Please enter a Email");
+                    emailAd.setError("Please Enter a Email");
                 }
                 else if(Username.getText().toString().trim().isEmpty()){
-                    Username.setError("Please enter a Username");
+                    Username.setError("Please Enter a Username");
                 }
                 else{
                     //validates that an id was chosen

@@ -41,7 +41,7 @@
         android:id="@+id/txt_No_account"
         android:layout_width="252dp"
         android:layout_height="43dp"
-        android:text="Already Have an account with OrderUp ? Clilck below to sign in"
+        android:text="Don't Have an Account? Click Below to Register!"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
