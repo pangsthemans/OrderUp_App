@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.orderup.R;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,15 +36,14 @@ public class HomeFragmentStaff extends Fragment {
 
     private HomeViewModel homeViewModel;
     ArrayList<String> listofrestaurants;
-//    ArrayList<String> list = new ArrayList<>();
     ArrayList<String> listofcustomers;
-//    ArrayList<String> listcust=new ArrayList<>();
     ArrayAdapter<String> dataAdapter;
     ArrayAdapter<String> dataCustAdapter;
     Spinner spCus;
     Spinner sp;
     String urlrestaurants="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/getrest.php";
     String urlcust="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/CUSTOMERS.php";
+    Button OrderUp;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -57,15 +58,24 @@ public class HomeFragmentStaff extends Fragment {
                 textView.setText(s);
             }
         });
-
+        OrderUp = root.findViewById(R.id.MakeOrder);
         listofrestaurants = new ArrayList<>();
         listofcustomers=new ArrayList<>();
         sp = root.findViewById(R.id.spinner);
-        spCus=root.findViewById(R.id.cust_spinner);
+        spCus = root.findViewById(R.id.cust_spinner);
         populateSpinner();
         populateSpinnerCus();
+
+        OrderUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MakeOrder();
+            }
+        });
         return root;
     }
+
+    //Populates the Customer dropdown spinner
     public void populateSpinnerCus(){
         StringRequest stringRequest = new StringRequest(Request.Method.GET, urlcust,
                 new Response.Listener<String>() {
@@ -89,6 +99,7 @@ public class HomeFragmentStaff extends Fragment {
         requestQueue.add(stringRequest);
     }
 
+    //Populates the Restaurant drop down spinner
     public void populateSpinner(){
         StringRequest stringRequest = new StringRequest(Request.Method.GET, urlrestaurants,
                 new Response.Listener<String>() {
@@ -112,6 +123,7 @@ public class HomeFragmentStaff extends Fragment {
         requestQueue.add(stringRequest);
     }
 
+    //Function to process the JSON on the Restaurants
     public void processJSON(String json) throws JSONException {
         JSONArray ja = new JSONArray(json);
         for(int i=0;i<ja.length();i++){
@@ -125,6 +137,8 @@ public class HomeFragmentStaff extends Fragment {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp.setAdapter(dataAdapter);
     }
+
+    //Function to process the JSON returned for Customers
     public void processJSONCustomers(String json) throws JSONException{
         JSONArray ja = new JSONArray(json);
         for(int i=0;i<ja.length();i++){
@@ -138,4 +152,15 @@ public class HomeFragmentStaff extends Fragment {
         dataCustAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spCus.setAdapter(dataCustAdapter);
     }
+
+    //Function to Make an order when button is clicked
+    public void MakeOrder(){
+        String restaurant = sp.getSelectedItem().toString();
+        String cutsomer = spCus.getSelectedItem().toString();
+        Bundle info = this.getActivity().getIntent().getExtras(); //Gets the username of the person making the order (need to call the activity the fragment came from
+        String StaffUsername = info.getString("username");
+
+        
+    }
 }
+

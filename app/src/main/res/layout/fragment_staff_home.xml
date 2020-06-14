@@ -39,7 +39,6 @@
         android:id="@+id/cust_spinner"
         android:layout_width="256dp"
         android:layout_height="33dp"
-        android:entries="@android:array/emailAddressTypes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -60,7 +59,7 @@
         app:layout_constraintVertical_bias="0.165" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/MakeOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Order Up"
