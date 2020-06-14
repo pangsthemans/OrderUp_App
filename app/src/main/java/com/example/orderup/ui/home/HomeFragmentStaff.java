@@ -2,6 +2,7 @@ package com.example.orderup.ui.home;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.service.voice.VoiceInteractionSession;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -33,6 +35,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import android.widget.Toast;
+
 
 public class HomeFragmentStaff extends Fragment {
 
@@ -46,6 +53,7 @@ public class HomeFragmentStaff extends Fragment {
     String urlrestaurants="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/getrest.php";
     String urlcust="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/CUSTOMERS.php";
     Button OrderUp;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -168,8 +176,8 @@ public class HomeFragmentStaff extends Fragment {
         for(int i=0;i<ja.length();i++){
             JSONObject jo=ja.getJSONObject(i);
             String name=jo.getString("USER_USERNAME");
-            String id=jo.getString("USER_ID");
-            listofcustomers.add(id+" : "+name);
+//            String id=jo.getString("USER_ID");
+            listofcustomers.add(name);
         }
         listofcustomers.add(0, "Customers");
         //Code below disables the first item from selection
@@ -182,7 +190,7 @@ public class HomeFragmentStaff extends Fragment {
                 }
                 return true;
             }
-            // Change color of the deselected item
+            // Change color item
             @Override
             public View getDropDownView(int position, View convertView,
                                         ViewGroup parent) {
@@ -203,11 +211,47 @@ public class HomeFragmentStaff extends Fragment {
 
     //Function to Make an order when button is clicked
     public void MakeOrder(){
-        String restaurant = sp.getSelectedItem().toString();
-        String customer = spCus.getSelectedItem().toString();
+        String url ="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/addorders.php";
+        final String restaurant = sp.getSelectedItem().toString();
+        final String customer = spCus.getSelectedItem().toString();
         Bundle info = this.getActivity().getIntent().getExtras(); //Gets the username of the person making the order (need to call the activity the fragment came from
-        String StaffUsername = info.getString("username");
+        final String StaffUsername = info.getString("username");
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String success = jsonObject.getString("success");
+                    String message = jsonObject.getString("message");
+                    if (success.equals("1")) {
+                        Toast.makeText(getActivity(), "Successful Order Placed", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Error Failure", Toast.LENGTH_SHORT).show();
 
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error Failure", Toast.LENGTH_SHORT).show();
+            }
+        }
+        ){
+            protected Map<String, String> getParams()throws AuthFailureError {
+                Map<String,String> params= new HashMap<>();
+                params.put("ORDER_OWNER",customer);
+                params.put("ORDER_CREATOR",StaffUsername);
+                params.put("ORDER_RESTAURANT",restaurant);
+                return params;
+
+            }
+        };
+        RequestQueue requestQueue= Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
     }
 }
 
