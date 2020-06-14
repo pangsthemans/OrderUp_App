@@ -1,5 +1,6 @@
 package com.example.orderup.ui.home;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -133,7 +134,30 @@ public class HomeFragmentStaff extends Fragment {
         }
         listofrestaurants.add(0, "Restaurants");
 
-        dataAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item,listofrestaurants);
+        dataAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item,listofrestaurants){
+            @Override
+          public boolean isEnabled(int position) {
+                // TODO Auto-generated method stub
+                if (position == 0 ){
+                    return false;
+                }
+                return true;
+            }
+            // Change color item
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                // TODO Auto-generated method stub
+                View mView = super.getDropDownView(position, convertView, parent);
+                TextView mTextView = (TextView) mView;
+                if (position == 0){
+                    mTextView.setTextColor(Color.GRAY);
+                } else {
+                    mTextView.setTextColor(Color.BLACK);
+                }
+                return mView;
+            }
+        };
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp.setAdapter(dataAdapter);
     }
@@ -148,7 +172,31 @@ public class HomeFragmentStaff extends Fragment {
             listofcustomers.add(id+" : "+name);
         }
         listofcustomers.add(0, "Customers");
-        dataCustAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item,listofcustomers);
+        //Code below disables the first item from selection
+        dataCustAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item,listofcustomers){
+            @Override
+            public boolean isEnabled(int position) {
+                // TODO Auto-generated method stub
+                if (position == 0 ){
+                    return false;
+                }
+                return true;
+            }
+            // Change color item
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                // TODO Auto-generated method stub
+                View mView = super.getDropDownView(position, convertView, parent);
+                TextView mTextView = (TextView) mView;
+                if (position == 0){
+                    mTextView.setTextColor(Color.GRAY);
+                } else {
+                    mTextView.setTextColor(Color.BLACK);
+                }
+                return mView;
+            }
+        };;
         dataCustAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spCus.setAdapter(dataCustAdapter);
     }
@@ -156,11 +204,11 @@ public class HomeFragmentStaff extends Fragment {
     //Function to Make an order when button is clicked
     public void MakeOrder(){
         String restaurant = sp.getSelectedItem().toString();
-        String cutsomer = spCus.getSelectedItem().toString();
+        String customer = spCus.getSelectedItem().toString();
         Bundle info = this.getActivity().getIntent().getExtras(); //Gets the username of the person making the order (need to call the activity the fragment came from
         String StaffUsername = info.getString("username");
 
-        
+        Log.d("Order values", restaurant + " " + customer +  " " + StaffUsername);
     }
 }
 
