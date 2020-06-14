@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,7 +46,6 @@ public class HomeFragmentStaff extends Fragment {
     String urlrestaurants="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/getrest.php";
     String urlcust="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/CUSTOMERS.php";
     Button OrderUp;
-
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -182,7 +182,7 @@ public class HomeFragmentStaff extends Fragment {
                 }
                 return true;
             }
-            // Change color item
+            // Change color of the deselected item
             @Override
             public View getDropDownView(int position, View convertView,
                                         ViewGroup parent) {
@@ -208,7 +208,6 @@ public class HomeFragmentStaff extends Fragment {
         Bundle info = this.getActivity().getIntent().getExtras(); //Gets the username of the person making the order (need to call the activity the fragment came from
         String StaffUsername = info.getString("username");
 
-        Log.d("Order values", restaurant + " " + customer +  " " + StaffUsername);
     }
 }
 
