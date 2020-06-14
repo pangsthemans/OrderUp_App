@@ -1,5 +1,6 @@
 package com.example.orderup.ui.home;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.service.voice.VoiceInteractionSession;
 import android.util.Log;
@@ -141,7 +142,30 @@ public class HomeFragmentStaff extends Fragment {
         }
         listofrestaurants.add(0, "Restaurants");
 
-        dataAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item,listofrestaurants);
+        dataAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item,listofrestaurants){
+            @Override
+          public boolean isEnabled(int position) {
+                // TODO Auto-generated method stub
+                if (position == 0 ){
+                    return false;
+                }
+                return true;
+            }
+            // Change color item
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                // TODO Auto-generated method stub
+                View mView = super.getDropDownView(position, convertView, parent);
+                TextView mTextView = (TextView) mView;
+                if (position == 0){
+                    mTextView.setTextColor(Color.GRAY);
+                } else {
+                    mTextView.setTextColor(Color.BLACK);
+                }
+                return mView;
+            }
+        };
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp.setAdapter(dataAdapter);
     }
@@ -156,7 +180,31 @@ public class HomeFragmentStaff extends Fragment {
             listofcustomers.add(name);
         }
         listofcustomers.add(0, "Customers");
-        dataCustAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item,listofcustomers);
+        //Code below disables the first item from selection
+        dataCustAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item,listofcustomers){
+            @Override
+            public boolean isEnabled(int position) {
+                // TODO Auto-generated method stub
+                if (position == 0 ){
+                    return false;
+                }
+                return true;
+            }
+            // Change color item
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                // TODO Auto-generated method stub
+                View mView = super.getDropDownView(position, convertView, parent);
+                TextView mTextView = (TextView) mView;
+                if (position == 0){
+                    mTextView.setTextColor(Color.GRAY);
+                } else {
+                    mTextView.setTextColor(Color.BLACK);
+                }
+                return mView;
+            }
+        };;
         dataCustAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spCus.setAdapter(dataCustAdapter);
     }
