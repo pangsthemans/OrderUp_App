@@ -35,10 +35,14 @@ public class GalleryFragmentStaff extends Fragment {
         OrderNum = new ArrayList<>();
         OrderNum.add("Order Number: 1");
         OrderNum.add("Order Number: 2");
+        OrderNum.add("Order Number: 3");
+        OrderNum.add("Order Number: 4");
 
         OrderCreators = new ArrayList<>();
         OrderCreators.add("Langiwe");
         OrderCreators.add("Sipho");
+        OrderCreators.add("Ghulame");
+        OrderCreators.add("Faisal");
 
         recyclerView = root.findViewById(R.id.recycle);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
