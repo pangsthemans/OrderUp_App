@@ -1,6 +1,7 @@
 package com.example.orderup.ui.gallery;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,34 +46,7 @@ public class GalleryFragmentStaff extends Fragment {
                                 OrderCreators = new ArrayList<>();
                                 OrderNum = new ArrayList<>();
 
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            try {
-                                JSONArray ja = new JSONArray(response);
 
-                                for(int i=0;i<ja.length();i++){
-                                    JSONObject jo=ja.getJSONObject(i);
-                                    String creator=jo.getString("ORDER_CREATOR");
-                                    String ordNum=jo.getString("ORDER_ID");
-                                    OrderNum.add("Order Number: "+ordNum);
-                                    OrderCreators.add(creator);
-                                }
-                            }
-
-                            catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-                }
-            });
-            RequestQueue requestQueue= Volley.newRequestQueue(this.getActivity());
-            requestQueue.add(stringRequest);
 
 
         OrderNum = new ArrayList<>();
@@ -85,7 +59,7 @@ public class GalleryFragmentStaff extends Fragment {
         OrderCreators.add("Sipho");
         OrderCreators.add("john");
 
-
+        addorders();
 
         recyclerView = root.findViewById(R.id.recycle);
                                 adapter = new Adapter(getActivity(),OrderNum,OrderCreators);
@@ -93,5 +67,40 @@ public class GalleryFragmentStaff extends Fragment {
         recyclerView.setAdapter(adapter);
 
         return root;
+    }
+    public void addorders(){
+
+    StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+            new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        processJSON(response);
+                    }
+
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+
+        }
+    });
+    RequestQueue requestQueue= Volley.newRequestQueue(this.getActivity());
+            requestQueue.add(stringRequest);
+    }
+    public void processJSON(String json) throws JSONException {
+        JSONArray ja = new JSONArray(json);
+
+        for(int i=0;i<ja.length();i++){
+            JSONObject jo=ja.getJSONObject(i);
+            String creator=jo.getString("ORDER_CREATOR");
+            String ordNum=jo.getString("ORDER_ID");
+            OrderNum.add("Order Number: "+ordNum);
+            OrderCreators.add(creator);
+            Log.d("TEST",creator);
+        }
     }
 }

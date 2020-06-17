@@ -121,7 +121,7 @@ public class RegistrationPage extends AppCompatActivity {
 
 
 
-    //method to open customer home page activity
+    //method to open customer home page activity used for development purposes so we dont have to sign in everytime we wanna test something
     public void openCustomerHome(String name, String email){
         Intent intent = new Intent(this,CustomerHome.class);
         intent.putExtra("username", name);
