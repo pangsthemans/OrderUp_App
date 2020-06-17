@@ -87,8 +87,6 @@ public class GalleryFragmentStaff extends Fragment {
             OrderCreators.add(creator);
 
         }
-        Log.d("TEST",OrderCreators.toString());
-        Log.d("TEST2",OrderNum.toString());
         adapter = new Adapter(getActivity(),OrderNum,OrderCreators);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
