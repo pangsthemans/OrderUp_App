@@ -39,35 +39,19 @@ public class GalleryFragmentStaff extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         galleryViewModel =
                 ViewModelProviders.of(this).get(GalleryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_staff_gallery, container, false);
-
-                                OrderCreators = new ArrayList<>();
-                                OrderNum = new ArrayList<>();
-
-
-
-
+        recyclerView = root.findViewById(R.id.recycle);
         OrderNum = new ArrayList<>();
-        OrderNum.add("Order Number: 1");
-        OrderNum.add("Order Number: 2");
-        OrderNum.add("test");
-
         OrderCreators = new ArrayList<>();
-        OrderCreators.add("Langiwe");
-        OrderCreators.add("Sipho");
-        OrderCreators.add("john");
-
         addorders();
 
-        recyclerView = root.findViewById(R.id.recycle);
-                                adapter = new Adapter(getActivity(),OrderNum,OrderCreators);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapter);
 
         return root;
     }
+
     public void addorders(){
 
     StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -91,6 +75,7 @@ public class GalleryFragmentStaff extends Fragment {
     RequestQueue requestQueue= Volley.newRequestQueue(this.getActivity());
             requestQueue.add(stringRequest);
     }
+
     public void processJSON(String json) throws JSONException {
         JSONArray ja = new JSONArray(json);
 
@@ -100,7 +85,12 @@ public class GalleryFragmentStaff extends Fragment {
             String ordNum=jo.getString("ORDER_ID");
             OrderNum.add("Order Number: "+ordNum);
             OrderCreators.add(creator);
-            Log.d("TEST",creator);
+
         }
+        Log.d("TEST",OrderCreators.toString());
+        Log.d("TEST2",OrderNum.toString());
+        adapter = new Adapter(getActivity(),OrderNum,OrderCreators);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(adapter);
     }
 }
