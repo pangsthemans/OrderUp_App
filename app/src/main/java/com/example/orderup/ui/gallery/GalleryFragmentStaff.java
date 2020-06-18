@@ -48,7 +48,6 @@ public class GalleryFragmentStaff extends Fragment {
         OrderCreators = new ArrayList<>();
         addorders();
 
-
         return root;
     }
 

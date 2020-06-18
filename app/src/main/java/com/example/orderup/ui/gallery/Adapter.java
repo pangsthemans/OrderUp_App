@@ -38,7 +38,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        //Bidn the textviews with the data received
+        //Bind the textviews with the data received
 
         String ONumber = OrderNumbers.get(position);
         holder.OrderNumber.setText(ONumber);
@@ -61,6 +61,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            // implement onClick for updating each order
+
             OrderNumber = itemView.findViewById(R.id.OrderNumber);
             OrderCreator = itemView.findViewById(R.id.OrderCreator);
             imageView = itemView.findViewById(R.id.restaurant);

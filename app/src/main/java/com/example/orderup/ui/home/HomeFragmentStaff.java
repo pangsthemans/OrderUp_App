@@ -208,8 +208,11 @@ public class HomeFragmentStaff extends Fragment {
         String url ="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/addorders.php";
         final String restaurant = sp.getSelectedItem().toString();
         final String customer = spCus.getSelectedItem().toString();
-        Bundle info = this.getActivity().getIntent().getExtras(); //Gets the username of the person making the order (need to call the activity the fragment came from
+
+        Bundle info = this.getActivity().getIntent().getExtras();//Gets the username of the person making the order (need to call the activity the fragment came from
+
         final String StaffUsername = info.getString("username");
+
         StringRequest stringRequest= new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
