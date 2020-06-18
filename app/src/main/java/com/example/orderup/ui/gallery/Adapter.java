@@ -21,7 +21,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     private ArrayList<String> OrderNumbers;
     private ArrayList<String> OrderCreators;
 
-    Adapter(Context context, ArrayList<String> ON, ArrayList<String> OrderC){
+    public Adapter(Context context, ArrayList<String> ON, ArrayList<String> OrderC){
         this.layoutInflater = LayoutInflater.from(context);
         OrderNumbers = ON;
         OrderCreators = OrderC;
@@ -38,7 +38,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        //Bidn the textviews with the data received
+        //Bind the text views with the data received
 
         String ONumber = OrderNumbers.get(position);
         holder.OrderNumber.setText(ONumber);

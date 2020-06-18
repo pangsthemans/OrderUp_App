@@ -46,6 +46,7 @@ public class GalleryFragmentStaff extends Fragment {
         recyclerView = root.findViewById(R.id.recycle);
         OrderNum = new ArrayList<>();
         OrderCreators = new ArrayList<>();
+        //This method adds orders from the orders database to the orders table
         addorders();
 
 
@@ -83,7 +84,7 @@ public class GalleryFragmentStaff extends Fragment {
             JSONObject jo=ja.getJSONObject(i);
             String creator=jo.getString("ORDER_CREATOR");
             String ordNum=jo.getString("ORDER_ID");
-            OrderNum.add("Order Number: "+ordNum);
+            OrderNum.add("Order Number: #"+ordNum);
             OrderCreators.add(creator);
 
         }
