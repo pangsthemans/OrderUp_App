@@ -1,16 +1,13 @@
 package com.example.orderup.ui.gallery;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,7 +28,7 @@ import java.util.ArrayList;
 
 public class GalleryFragmentStaff extends Fragment {
     RecyclerView recyclerView;
-    Adapter adapter;
+    StaffAdapter staffAdapter;
     ArrayList<String> OrderNum;
     ArrayList<String> OrderCreators;
     String url="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/getYourOrders.php";
@@ -87,8 +84,8 @@ public class GalleryFragmentStaff extends Fragment {
             OrderCreators.add(creator);
 
         }
-        adapter = new Adapter(getActivity(),OrderNum,OrderCreators);
+        staffAdapter = new StaffAdapter(getActivity(),OrderNum,OrderCreators);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(staffAdapter);
     }
 }

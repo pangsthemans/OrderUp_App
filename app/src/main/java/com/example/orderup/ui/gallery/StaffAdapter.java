@@ -1,30 +1,43 @@
 package com.example.orderup.ui.gallery;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
-
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderup.R;
+import com.example.orderup.StaffHome;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> {
 
     private LayoutInflater layoutInflater;
     private ArrayList<String> OrderNumbers;
     private ArrayList<String> OrderCreators;
+    private Context mcontext;
+    private String selectUpdate;
 
-    public Adapter(Context context, ArrayList<String> ON, ArrayList<String> OrderC){
+    public StaffAdapter(Context context, ArrayList<String> ON, ArrayList<String> OrderC){
         this.layoutInflater = LayoutInflater.from(context);
         OrderNumbers = ON;
         OrderCreators = OrderC;
+        mcontext = context;
     }
 
     @NonNull
@@ -61,9 +74,39 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            //implement onClick to update orders
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openDialog();
+                }
+            });
+
             OrderNumber = itemView.findViewById(R.id.OrderNumber);
             OrderCreator = itemView.findViewById(R.id.OrderCreator);
             imageView = itemView.findViewById(R.id.restaurant);
         }
+    }
+
+    public void openDialog(){
+        final String [] updateoptions = {"Pending","Ready", "Collected"};
+
+
+        AlertDialog.Builder d = new AlertDialog.Builder(mcontext);
+        d.setTitle("Update Order Status");
+        d.setSingleChoiceItems(updateoptions, 0, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                selectUpdate = updateoptions[which];
+            }
+        });
+        d.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //Send network request here to update the status of the order
+            }
+        });
+        AlertDialog al = d.create();
+        al.show();
     }
 }

@@ -23,7 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.orderup.R;
-import com.example.orderup.ui.gallery.Adapter;
+import com.example.orderup.ui.gallery.CustomerAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,7 +38,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     ArrayList<String> OrderNumber;
     ArrayList<String> OrderName;
-    Adapter adapter;
+    CustomerAdapter adapter;
     Bundle info;
     RecyclerView recyclerView;
     String url="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/getYourOrders.php";
@@ -111,7 +111,7 @@ public class HomeFragment extends Fragment {
             OrderName.add(name);
             Log.d("TEST",name);
         }
-        adapter = new Adapter(getActivity(),OrderNumber,OrderName);
+        adapter = new CustomerAdapter(getActivity(),OrderNumber,OrderName);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
     }
