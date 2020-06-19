@@ -41,7 +41,6 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
     private LayoutInflater layoutInflater;
     private ArrayList<String> OrderNumbers;
     private ArrayList<String> OrderCreators;
-    private ArrayList<ViewHolder> testarray;
     private Context mcontext;
     private String selectUpdate;
     public String url="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/changeorderStat.php";
@@ -88,18 +87,15 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             //implement onClick to update orders
-            int mypos;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int mypos=getAdapterPosition();
                     String myid= OrderNumbers.get(mypos);
                     String num=myid.substring(myid.lastIndexOf("#")+1);
-//                    Log.d("TEST",num);
                     openDialog(num);
                 }
             });
-//            this.context=mcontext;
             OrderNumber = itemView.findViewById(R.id.OrderNumber);
             OrderCreator = itemView.findViewById(R.id.OrderCreator);
             imageView = itemView.findViewById(R.id.restaurant);
@@ -128,6 +124,7 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
                             @Override
                             public void onResponse(String response) {
                                 try {
+
                                     processJSON(response);
                                 }
 
@@ -161,17 +158,14 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
     }
 
     public void processJSON(String json) throws JSONException {
-        JSONArray ja = new JSONArray(json);
-
-        for(int i=0;i<ja.length();i++){
-            JSONObject jo=ja.getJSONObject(i);
-            String success=jo.getString("success");
+            JSONObject jsonObject = new JSONObject(json);
+            String success=jsonObject.getString("success");
             if(success.equals("1")){
                 Toast.makeText(mcontext,"Successful Update to Status",Toast.LENGTH_SHORT).show();
             }
             else{
                 Toast.makeText(mcontext,"Some kinda error",Toast.LENGTH_SHORT).show();
             }
-        }
+
     }
 }
