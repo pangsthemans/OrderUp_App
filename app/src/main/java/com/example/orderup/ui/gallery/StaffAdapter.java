@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -143,11 +144,8 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String,String> params= new HashMap<>();
-                        //THis is where i need to post the ID and Status i am changing
-                        //so on this line the update obtions is giving an index of -1 for some reason
                         params.put("ORDER_ID",orderid);
-                        Log.d("TEST",updateoptions[which]);
-                        params.put("STATUS_CHANGED",updateoptions[which]);
+                        params.put("STATUS_CHANGE",selectUpdate);
                         return params;
                     }
                 };
@@ -169,10 +167,10 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
             JSONObject jo=ja.getJSONObject(i);
             String success=jo.getString("success");
             if(success.equals("1")){
-                Log.d("TEST","Successful Change");
+                Toast.makeText(mcontext,"Successful Update to Status",Toast.LENGTH_SHORT).show();
             }
             else{
-                Log.d("TEST","Something Went Wrong");
+                Toast.makeText(mcontext,"Some kinda error",Toast.LENGTH_SHORT).show();
             }
         }
     }
