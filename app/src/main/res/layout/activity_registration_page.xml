@@ -45,8 +45,8 @@
 
     <EditText
         android:id="@+id/txt_password_regis"
-        android:layout_width="247dp"
-        android:layout_height="42dp"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
         android:background="@drawable/edittext_style"
         android:ems="10"
         android:hint="Password"
@@ -56,15 +56,15 @@
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.465"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_username_regis"
-        app:layout_constraintVertical_bias="0.036" />
+        app:layout_constraintVertical_bias="0.034" />
 
     <EditText
         android:id="@+id/txt_username_regis"
-        android:layout_width="255dp"
-        android:layout_height="39dp"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
         android:background="@drawable/edittext_style"
         android:ems="10"
         android:hint="Username"
@@ -73,15 +73,15 @@
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintHorizontal_bias="0.465"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.349" />
+        app:layout_constraintVertical_bias="0.348" />
 
     <EditText
         android:id="@+id/txt_reEnterPassword"
-        android:layout_width="247dp"
-        android:layout_height="42dp"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
         android:background="@drawable/edittext_style"
         android:ems="10"
         android:hint="Re-enter Password"
@@ -90,10 +90,10 @@
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.465"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_password_regis"
-        app:layout_constraintVertical_bias="0.057" />
+        app:layout_constraintVertical_bias="0.028" />
 
     <Button
         android:id="@+id/btn_confirmRegis"
@@ -109,8 +109,8 @@
 
     <EditText
         android:id="@+id/txt_email"
-        android:layout_width="238dp"
-        android:layout_height="42dp"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
         android:background="@drawable/edittext_style"
         android:ems="10"
         android:hint="Email Address"
@@ -119,10 +119,10 @@
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.468"
+        app:layout_constraintHorizontal_bias="0.465"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_reEnterPassword"
-        app:layout_constraintVertical_bias="0.081" />
+        app:layout_constraintVertical_bias="0.052" />
 
     <RadioButton
         android:id="@+id/radioCustomer"
