@@ -76,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String success= jsonObject.getString("success");
+                            String message= jsonObject.getString("message");
                             JSONArray jsonArray=jsonObject.getJSONArray("login");
                             if(success.equals("1")){
                                 for(int i=0;i<jsonArray.length();i++){
@@ -88,12 +89,14 @@ public class LoginActivity extends AppCompatActivity {
                                         intent.putExtra("username",username);
                                         intent.putExtra("user_email",email);
                                         startActivity(intent);
+                                        finish();
                                     }
                                     else if(usertype.equals("Staff")){
                                         Intent intent = new Intent(LoginActivity.this,StaffHome.class);
                                         intent.putExtra("username",username);
                                         intent.putExtra("user_email",email);
                                         startActivity(intent);
+                                        finish();
                                     }
 
                                     Toast.makeText(LoginActivity.this,
@@ -101,6 +104,10 @@ public class LoginActivity extends AppCompatActivity {
                                                     +username+"\nYour Email :"+
                                                     email,Toast.LENGTH_SHORT).show();
                                 }
+                            }
+                            else if(success.equals("0")){
+                                Toast.makeText(LoginActivity.this,message,Toast.LENGTH_SHORT).show();
+                                Login_button.setVisibility(View.VISIBLE);
                             }
 
                         } catch (JSONException e) {

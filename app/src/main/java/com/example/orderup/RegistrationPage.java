@@ -137,6 +137,7 @@ public class RegistrationPage extends AppCompatActivity {
         intent.putExtra("username", name);
         intent.putExtra("user_email", email);
         startActivity(intent);
+        finish();
     }
 
     //method to add users to the MySQL database on lamp server
@@ -170,6 +171,10 @@ public class RegistrationPage extends AppCompatActivity {
                                 else{
                                     openCustomerHome(name, email);
                                 }
+                            }
+                            else if(success.equals("0")){
+                                Toast.makeText(RegistrationPage.this,message,Toast.LENGTH_SHORT).show();
+                                ConfirmRegis.setVisibility(View.VISIBLE);
                             }
                             else if(success.equals("0") && message.equals("User Already Exists")){
                                 Toast.makeText(RegistrationPage.this,"Registration Failure!\n User Already Exists",Toast.LENGTH_SHORT).show();
@@ -210,6 +215,7 @@ public class RegistrationPage extends AppCompatActivity {
         intent.putExtra("username", name);
         intent.putExtra("user_email", email);
         startActivity(intent);
+        finish();
     }
 
     //Function to check which button selected by User
