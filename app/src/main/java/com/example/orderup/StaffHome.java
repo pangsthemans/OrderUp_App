@@ -106,4 +106,9 @@ public class StaffHome extends AppCompatActivity {
         navEmail.setText(email);
 
     }
+
+    @Override
+    public void onBackPressed(){
+        moveTaskToBack(true);
+    }
 }

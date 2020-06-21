@@ -23,6 +23,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegistrationPage extends AppCompatActivity {
 
@@ -33,10 +35,10 @@ public class RegistrationPage extends AppCompatActivity {
     private Button ConfirmRegis;
     private EditText Username;
     private EditText Password;
-//    private ProgressBar loading;
     private EditText reenterPassword;
     private EditText emailAd;
     private static String URL_REGIST="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/register.php";
+//    private ProgressBar loading;
 
 
 
@@ -73,12 +75,13 @@ public class RegistrationPage extends AppCompatActivity {
                 }
             }
         });
-
+        //Multiple methods and if statements to make sure their password is secure
         ConfirmRegis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!reenterPassword.getText().toString().trim().equals(Password.getText().toString().trim())) {
-                    Toast.makeText(RegistrationPage.this, "Please make sure passwords match", Toast.LENGTH_SHORT).show();
+                    Password.setError("Please make sure passwords match");
+                    reenterPassword.setError("Please make sure passwords match");
                 }
                 else if(Password.getText().toString().trim().isEmpty()){
                     Password.setError("Please Enter a Password");
@@ -86,8 +89,15 @@ public class RegistrationPage extends AppCompatActivity {
                 else if(emailAd.getText().toString().trim().isEmpty()){
                     emailAd.setError("Please Enter a Email");
                 }
+                else if(Username.getText().toString().trim().toLowerCase().equals(Password.getText().toString().trim().toLowerCase())){
+                    Username.setError("Password and Username Cannot be Identical");
+                    Password.setError("Password and Username Cannot be Identical");
+                }
                 else if(Username.getText().toString().trim().isEmpty()){
                     Username.setError("Please Enter a Username");
+                }
+                else if(!Password_Validation(Password.getText().toString().trim())){
+                    Password.setError("Password must contain a SPECIAL character,LETTER, DIGIT and have Eight(8) characters");
                 }
                 else{
                     //validates that an id was chosen
@@ -121,15 +131,16 @@ public class RegistrationPage extends AppCompatActivity {
 
 
 
-    //method to open customer home page activity used for development purposes so we dont have to sign in everytime we wanna test something
+    //method to open customer home page activity used for development purposes so we don't have to sign in every time we wanna test something
     public void openCustomerHome(String name, String email){
         Intent intent = new Intent(this,CustomerHome.class);
         intent.putExtra("username", name);
         intent.putExtra("user_email", email);
         startActivity(intent);
+        finish();
     }
 
-    //method to add users to the MySQL databse on lamp server
+    //method to add users to the MySQL database on lamp server
     public void Regist(){
 //        loading.setVisibility(View.VISIBLE);
         ConfirmRegis.setVisibility(View.GONE);
@@ -160,6 +171,10 @@ public class RegistrationPage extends AppCompatActivity {
                                 else{
                                     openCustomerHome(name, email);
                                 }
+                            }
+                            else if(success.equals("0")){
+                                Toast.makeText(RegistrationPage.this,message,Toast.LENGTH_SHORT).show();
+                                ConfirmRegis.setVisibility(View.VISIBLE);
                             }
                             else if(success.equals("0") && message.equals("User Already Exists")){
                                 Toast.makeText(RegistrationPage.this,"Registration Failure!\n User Already Exists",Toast.LENGTH_SHORT).show();
@@ -200,6 +215,7 @@ public class RegistrationPage extends AppCompatActivity {
         intent.putExtra("username", name);
         intent.putExtra("user_email", email);
         startActivity(intent);
+        finish();
     }
 
     //Function to check which button selected by User
@@ -213,6 +229,27 @@ public class RegistrationPage extends AppCompatActivity {
         else{
             return -1;
         }
+    }
+    //this method validates the strength of the users password
+    public static boolean Password_Validation(String password)
+    {
+
+        if(password.length()>=8)
+        {
+            Pattern letter = Pattern.compile("[a-zA-z]");
+            Pattern digit = Pattern.compile("[0-9]");
+            Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
+            //Pattern eight = Pattern.compile (".{8}");
+            Matcher hasLetter = letter.matcher(password);
+            Matcher hasDigit = digit.matcher(password);
+            Matcher hasSpecial = special.matcher(password);
+
+            return hasLetter.find() && hasDigit.find() && hasSpecial.find();
+
+        }
+        else
+            return false;
+
     }
 
 }
