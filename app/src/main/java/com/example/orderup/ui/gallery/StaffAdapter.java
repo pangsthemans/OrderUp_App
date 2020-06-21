@@ -88,18 +88,15 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             //implement onClick to update orders
-            int mypos;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int mypos=getAdapterPosition();
                     String myid= OrderNumbers.get(mypos);
-                    String num=myid.substring(myid.lastIndexOf("#")+1);
-//                    Log.d("TEST",num);
+                    String num=myid.substring(myid.lastIndexOf("#") + 1);
                     openDialog(num);
                 }
             });
-//            this.context=mcontext;
             OrderNumber = itemView.findViewById(R.id.OrderNumber);
             OrderCreator = itemView.findViewById(R.id.OrderCreator);
             imageView = itemView.findViewById(R.id.restaurant);
