@@ -82,7 +82,7 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
 
         TextView OrderNumber, OrderCreator;
         ImageView imageView;
-        private Context context;
+//        private Context context;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -166,6 +166,5 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
             else{
                 Toast.makeText(mcontext,"Some kinda error",Toast.LENGTH_SHORT).show();
             }
-
     }
 }
