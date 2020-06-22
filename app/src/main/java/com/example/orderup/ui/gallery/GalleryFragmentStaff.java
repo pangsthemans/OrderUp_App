@@ -87,7 +87,7 @@ public class GalleryFragmentStaff extends Fragment {
             String ordTime = jo.getString("ORDER_TIME");
             String ordStatus = jo.getString("ORDER_STATUS");
             OrderNum.add("Order Number: #"+ordNum);
-            OrderCreators.add(creator);
+            OrderCreators.add("Created by: "+creator);
             OrderCreationTime.add("Created at: " + ordTime);
             OrderStatus.add("Status: " + ordStatus);
             //Need to add The creation time and Status to new arraylists here
@@ -97,5 +97,6 @@ public class GalleryFragmentStaff extends Fragment {
         staffAdapter = new StaffAdapter(getActivity(),OrderNum,OrderCreators, OrderCreationTime, OrderStatus);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(staffAdapter);
+
     }
 }

@@ -59,6 +59,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
@@ -169,8 +170,8 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
             JSONObject jsonObject = new JSONObject(json);
             String success=jsonObject.getString("success");
             if(success.equals("1")){
-                Log.d("TEST","IT worked");
                 Toast.makeText(mcontext,"Thank You for Your Feedback",Toast.LENGTH_SHORT).show();
+
             }
             else{
                 Toast.makeText(mcontext,"Some kinda error",Toast.LENGTH_SHORT).show();

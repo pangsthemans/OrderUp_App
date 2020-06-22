@@ -63,6 +63,13 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
 
         return new ViewHolder(view);
     }
+//    public void updateList(ArrayList<String> items){
+//        if (items!= null && items.size()>0){
+//            OrderStats.clear();
+//            OrderStats.addAll(items);
+//            notifyDataSetChanged();
+//        }
+//    }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
@@ -103,7 +110,9 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
                 @Override
                 public void onClick(View v) {
                     int mypos=getAdapterPosition();
+//                    int posi = 0;
                     String myid= OrderNumbers.get(mypos);
+                    String stat=OrderStats.get(mypos);
                     String num=myid.substring(myid.lastIndexOf("#")+1);
                     openDialog(num);
                 }
@@ -132,14 +141,13 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
             @Override
             public void onClick(DialogInterface dialog, final int which) {
                 //Send network request here to update the status of the order
-
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 try {
-
                                     processJSON(response);
+
                                 }
 
                                 catch (JSONException e) {

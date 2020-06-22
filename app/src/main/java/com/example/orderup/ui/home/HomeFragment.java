@@ -77,7 +77,6 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            Log.d("TEST","INSIDE METHOD");
                             processJSON(response);
                         }
 
