@@ -82,8 +82,10 @@ public class GalleryFragmentStaff extends Fragment {
             String ordNum=jo.getString("ORDER_ID");
             OrderNum.add("Order Number: #"+ordNum);
             OrderCreators.add(creator);
+            //Need to add The creation time and Status to new arraylists here
 
         }
+        //Over here should be an error, need to add new Arraylists to the constructor first creation time then status
         staffAdapter = new StaffAdapter(getActivity(),OrderNum,OrderCreators);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(staffAdapter);

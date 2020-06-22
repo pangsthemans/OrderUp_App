@@ -41,15 +41,19 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
     private LayoutInflater layoutInflater;
     private ArrayList<String> OrderNumbers;
     private ArrayList<String> OrderCreators;
+    private ArrayList<String> OrderTime;
+    private ArrayList<String> OrderStats;
     private Context mcontext;
     private String selectUpdate;
     public String url="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/changeorderStat.php";
 
-    public StaffAdapter(Context context, ArrayList<String> ON, ArrayList<String> OrderC){
+    public StaffAdapter(Context context, ArrayList<String> ON, ArrayList<String> OrderC, ArrayList<String> OrderCreateTime, ArrayList<String> OrderStatus){
         this.layoutInflater = LayoutInflater.from(context);
         OrderNumbers = ON;
         OrderCreators = OrderC;
         mcontext = context;
+        OrderTime = OrderCreateTime;
+        OrderStats = OrderStatus;
     }
 
     @NonNull
@@ -71,6 +75,14 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
         //Similarly for images and Order creator
         String OCreator = OrderCreators.get(position);
         holder.OrderCreator.setText((OCreator));
+
+        //Bind the Order Creation time
+        String OrderT = OrderTime.get(position);
+        holder.CreationTime.setText(OrderT);
+
+        //Bind the order status
+        String OrderStatus = OrderStats.get(position);
+        holder.OrderStatus.setText(OrderStatus);
     }
 
     @Override
@@ -80,7 +92,7 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView OrderNumber, OrderCreator;
+        TextView OrderNumber, OrderCreator, CreationTime, OrderStatus;
         ImageView imageView;
 //        private Context context;
 
@@ -99,6 +111,8 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
             OrderNumber = itemView.findViewById(R.id.OrderNumber);
             OrderCreator = itemView.findViewById(R.id.OrderCreator);
             imageView = itemView.findViewById(R.id.restaurant);
+            CreationTime = itemView.findViewById(R.id.CreateTime);
+            OrderStatus = itemView.findViewById(R.id.OrderStatus);
         }
     }
 

@@ -35,16 +35,20 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
     private LayoutInflater layoutInflater;
     private ArrayList<String> OrderNumbers;
     private ArrayList<String> OrderCreators;
+    private ArrayList<String> OrderTime;
+    private ArrayList<String> OrderStats;
     private Context mcontext;
     private String selectUpdate;
     public String url="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/changeOrderRating.php";
 
 
-    public CustomerAdapter(Context context, ArrayList<String> ON, ArrayList<String> OrderC){
+    public CustomerAdapter(Context context, ArrayList<String> ON, ArrayList<String> OrderC, ArrayList<String> OrderCreateTime, ArrayList<String> OrderStatus){
         this.layoutInflater = LayoutInflater.from(context);
         OrderNumbers = ON;
         OrderCreators = OrderC;
         mcontext=context;
+        OrderTime = OrderCreateTime;
+        OrderStats = OrderStatus;
     }
 
     @NonNull
@@ -67,6 +71,14 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
         String OCreator = OrderCreators.get(position);
         holder.OrderCreator.setText((OCreator));
 
+        //Bind the Order Creation time
+        String OrderT = OrderTime.get(position);
+        holder.CreationTime.setText(OrderT);
+
+        //Bind the order status
+        String OrderStatus = OrderStats.get(position);
+        holder.OrderStatus.setText(OrderStatus);
+
     }
 
     @Override
@@ -76,7 +88,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView OrderNumber, OrderCreator;
+        TextView OrderNumber, OrderCreator, CreationTime, OrderStatus;;
         ImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {
@@ -94,7 +106,11 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
             OrderNumber = itemView.findViewById(R.id.OrderNumber);
             OrderCreator = itemView.findViewById(R.id.OrderCreator);
             imageView = itemView.findViewById(R.id.restaurant);
+            CreationTime = itemView.findViewById(R.id.CreateTime);
+            OrderStatus = itemView.findViewById(R.id.OrderStatus);
         }
+
+
         public void openDialog(final String orderid){
             final String [] updateoptions = {"GOOD", "BAD"};
 

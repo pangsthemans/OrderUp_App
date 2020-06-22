@@ -110,7 +110,9 @@ public class HomeFragment extends Fragment {
             OrderNumber.add("Order Number: #"+ordNum);
             OrderName.add(name);
             Log.d("TEST",name);
+            //Need to add The creation time and Status to new arraylists here
         }
+        //Over here should be an error, need to add new Arraylists to the constructor first creation time then status
         adapter = new CustomerAdapter(getActivity(),OrderNumber,OrderName);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
