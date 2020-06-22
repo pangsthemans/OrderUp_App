@@ -59,7 +59,6 @@ public class HomeFragment extends Fragment {
         info = this.getActivity().getIntent().getExtras();
         String username= info.getString("username");
         recyclerView=root.findViewById(R.id.recycle_cust);
-        Log.d("TEST",username);
         OrderNumber= new ArrayList<>();
         OrderName=new ArrayList<>();
         addorders(username);
@@ -73,7 +72,6 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            Log.d("TEST","INSIDE METHOD");
                             processJSON(response);
                         }
 
@@ -109,7 +107,6 @@ public class HomeFragment extends Fragment {
             String ordNum=jo.getString("ORDER_ID");
             OrderNumber.add("Order Number: #"+ordNum);
             OrderName.add(name);
-            Log.d("TEST",name);
         }
         adapter = new CustomerAdapter(getActivity(),OrderNumber,OrderName);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
