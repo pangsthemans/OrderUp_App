@@ -31,6 +31,8 @@ public class GalleryFragmentStaff extends Fragment {
     StaffAdapter staffAdapter;
     ArrayList<String> OrderNum;
     ArrayList<String> OrderCreators;
+    ArrayList<String> OrderCreationTime;
+    ArrayList<String> OrderStatus;
     String url="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/getYourOrders.php";
     private GalleryViewModel galleryViewModel;
 
@@ -43,6 +45,8 @@ public class GalleryFragmentStaff extends Fragment {
         recyclerView = root.findViewById(R.id.recycle);
         OrderNum = new ArrayList<>();
         OrderCreators = new ArrayList<>();
+        OrderCreationTime = new ArrayList<>();
+        OrderStatus = new ArrayList<>();
         //This method adds orders from the orders database to the orders table
         addorders();
 
@@ -80,13 +84,17 @@ public class GalleryFragmentStaff extends Fragment {
             JSONObject jo=ja.getJSONObject(i);
             String creator=jo.getString("ORDER_CREATOR");
             String ordNum=jo.getString("ORDER_ID");
+            String ordTime = jo.getString("ORDER_TIME");
+            String ordStatus = jo.getString("ORDER_STATUS");
             OrderNum.add("Order Number: #"+ordNum);
             OrderCreators.add(creator);
+            OrderCreationTime.add("Created at: " + ordTime);
+            OrderStatus.add("Status: " + ordStatus);
             //Need to add The creation time and Status to new arraylists here
 
         }
         //Over here should be an error, need to add new Arraylists to the constructor first creation time then status
-        staffAdapter = new StaffAdapter(getActivity(),OrderNum,OrderCreators);
+        staffAdapter = new StaffAdapter(getActivity(),OrderNum,OrderCreators, OrderCreationTime, OrderStatus);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(staffAdapter);
     }
