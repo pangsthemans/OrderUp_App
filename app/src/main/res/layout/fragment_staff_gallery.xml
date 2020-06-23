@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.gallery.GalleryFragmentStaff">
 
+<!--    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        xmlns:tools="http://schemas.android.com/tools"-->
+<!--        android:id="@+id/container"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        tools:context="com.example.orderup.ui.gallery.GalleryFragmentStaff"-->
+<!--         >-->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle"
         android:layout_width="409dp"
@@ -16,4 +24,9 @@
         app:layout_constraintTop_toTopOf="parent"
         android:paddingTop="100dp"
         android:paddingBottom="100dp"/>
+
+
+    <!--    </android.support.v4.widget.SwipeRefreshLayout>-->
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

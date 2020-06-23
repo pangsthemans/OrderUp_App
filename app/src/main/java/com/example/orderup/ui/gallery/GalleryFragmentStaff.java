@@ -19,6 +19,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.orderup.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,12 +39,14 @@ public class GalleryFragmentStaff extends Fragment {
     private GalleryViewModel galleryViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+                             final ViewGroup container, Bundle savedInstanceState) {
 
         galleryViewModel =
                 ViewModelProviders.of(this).get(GalleryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_staff_gallery, container, false);
         recyclerView = root.findViewById(R.id.recycle);
+
+//        circlebutton = root.findViewById(R.id.fab);
         OrderNum = new ArrayList<>();
         OrderCreators = new ArrayList<>();
         OrderCreationTime = new ArrayList<>();

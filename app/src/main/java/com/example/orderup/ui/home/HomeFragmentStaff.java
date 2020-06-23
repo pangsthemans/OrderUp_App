@@ -25,6 +25,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.orderup.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -68,7 +70,15 @@ public class HomeFragmentStaff extends Fragment {
         spCus = root.findViewById(R.id.cust_spinner);
         populateSpinner();
         populateSpinnerCus();
-
+//        FloatingActionButton fab = root.findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
         OrderUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

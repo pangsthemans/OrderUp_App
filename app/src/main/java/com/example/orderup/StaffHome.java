@@ -32,21 +32,17 @@ public class StaffHome extends AppCompatActivity {
         Spinner sp =(Spinner) findViewById(R.id.spinner);
         logout=findViewById(R.id.action_logout);
 
-//        testinggetinfo=findViewById(R.id.text_testdisp);
-        String url="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/getrest.php";
-
-
         setContentView(R.layout.activity_staff_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 

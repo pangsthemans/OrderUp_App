@@ -110,9 +110,7 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
                 @Override
                 public void onClick(View v) {
                     int mypos=getAdapterPosition();
-//                    int posi = 0;
                     String myid= OrderNumbers.get(mypos);
-                    String stat=OrderStats.get(mypos);
                     String num=myid.substring(myid.lastIndexOf("#")+1);
                     openDialog(num);
                 }
