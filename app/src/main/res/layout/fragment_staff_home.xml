@@ -60,9 +60,11 @@
 
     <Button
         android:id="@+id/MakeOrder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="211dp"
+        android:layout_height="35dp"
+        android:background="@drawable/order_button"
         android:text="Order Up"
+        android:textColor="#C33764"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
