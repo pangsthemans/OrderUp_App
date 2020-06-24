@@ -215,7 +215,7 @@ public class HomeFragmentStaff extends Fragment {
 
     //Function to Make an order when button is clicked
     public void MakeOrder(){
-        String url ="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/addorders.php";
+        String url ="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/addordersredo.php";
         final String restaurant = sp.getSelectedItem().toString();
         final String customer = spCus.getSelectedItem().toString();
 

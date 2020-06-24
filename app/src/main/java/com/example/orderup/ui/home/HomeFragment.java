@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
     CustomerAdapter adapter;
     Bundle info;
     RecyclerView recyclerView;
-    String url="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/getYourOrders.php";
+    String url="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/getordersnew.php";
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,

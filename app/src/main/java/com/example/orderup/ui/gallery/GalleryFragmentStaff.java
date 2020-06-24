@@ -35,7 +35,7 @@ public class GalleryFragmentStaff extends Fragment {
     ArrayList<String> OrderCreators;
     ArrayList<String> OrderCreationTime;
     ArrayList<String> OrderStatus;
-    String url="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/getYourOrders.php";
+    String url="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/getordersnew.php";
     private GalleryViewModel galleryViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -45,6 +45,20 @@ public class GalleryFragmentStaff extends Fragment {
                 ViewModelProviders.of(this).get(GalleryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_staff_gallery, container, false);
         recyclerView = root.findViewById(R.id.recycle);
+
+        FloatingActionButton fab = root.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                staffAdapter = new StaffAdapter(getActivity(),OrderNum,OrderCreators, OrderCreationTime, OrderStatus);
+//                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//                recyclerView.setAdapter(staffAdapter);
+//                staffAdapter.notifyDataSetChanged();
+                addorders();
+                Snackbar.make(view, "Refreshed", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
 //        circlebutton = root.findViewById(R.id.fab);
         OrderNum = new ArrayList<>();
@@ -94,9 +108,10 @@ public class GalleryFragmentStaff extends Fragment {
             OrderCreators.add("Created by: "+creator);
             OrderCreationTime.add("Created at: " + ordTime);
             OrderStatus.add("Status: " + ordStatus);
-            //Need to add The creation time and Status to new arraylists here
 
         }
+//        recyclerView.removeAllViews();
+//        staffAdapter.notifyItemRangeRemoved(0,OrderNum.size());
         //Over here should be an error, need to add new Arraylists to the constructor first creation time then status
         staffAdapter = new StaffAdapter(getActivity(),OrderNum,OrderCreators, OrderCreationTime, OrderStatus);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
