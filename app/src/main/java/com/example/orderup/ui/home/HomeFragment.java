@@ -108,7 +108,7 @@ public class HomeFragment extends Fragment {
 
         for(int i=0;i<ja.length();i++){
             JSONObject jo=ja.getJSONObject(i);
-            String name=jo.getString("ORDER_OWNER");
+            String name=jo.getString("ORDER_OWNER_NAME");
             String ordNum=jo.getString("ORDER_ID");
             String ordTime = jo.getString("ORDER_TIME");
             String ordStatus = jo.getString("ORDER_STATUS");
