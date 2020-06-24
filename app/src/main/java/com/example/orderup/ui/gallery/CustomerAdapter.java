@@ -169,9 +169,13 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
         public void processJSON(String json) throws JSONException {
             JSONObject jsonObject = new JSONObject(json);
             String success=jsonObject.getString("success");
+            String message=jsonObject.getString("message");
             if(success.equals("1")){
                 Toast.makeText(mcontext,"Thank You for Your Feedback",Toast.LENGTH_SHORT).show();
 
+            }
+            else if(success.equals("0")){
+                Toast.makeText(mcontext,message,Toast.LENGTH_SHORT).show();
             }
             else{
                 Toast.makeText(mcontext,"Some kinda error",Toast.LENGTH_SHORT).show();
