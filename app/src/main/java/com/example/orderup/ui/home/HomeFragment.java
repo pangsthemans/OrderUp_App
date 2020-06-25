@@ -61,7 +61,6 @@ public class HomeFragment extends Fragment {
         info = this.getActivity().getIntent().getExtras();
         String username= info.getString("username");
         recyclerView=root.findViewById(R.id.recycle_cust);
-        Log.d("TEST",username);
         OrderNumber= new ArrayList<>();
         OrderCreationTime = new ArrayList<>();
         OrderName=new ArrayList<>();
@@ -116,7 +115,6 @@ public class HomeFragment extends Fragment {
             OrderName.add(name);
             OrderCreationTime.add("Created at: " + ordTime);
             OrderStatus.add("Status: " + ordStatus);
-            Log.d("TEST",name);
         }
         //Over here should be an error, need to add new Arraylists to the constructor first creation time then status
         adapter = new CustomerAdapter(getActivity(),OrderNumber,OrderName, OrderCreationTime, OrderStatus);

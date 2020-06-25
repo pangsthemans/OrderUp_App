@@ -1,6 +1,7 @@
 package com.example.orderup;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,14 +19,34 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class StaffHome extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private MenuItem logout;
+    public int numThumbsUp=0;
+    public int numThumbsdown=0;
+    private static String url="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/getStaffRating.php";
+    public ProgressBar progressBar;
+    public TextView Rating;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +79,7 @@ public class StaffHome extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        updateNavHeader();
     }
 
     @Override
@@ -94,16 +116,63 @@ public class StaffHome extends AppCompatActivity {
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = headerView.findViewById(R.id.nav_username);
         TextView navEmail = headerView.findViewById(R.id.nav_email);
-        TextView Rating = headerView.findViewById(R.id.Rating);
-        ProgressBar progressBar = headerView.findViewById(R.id.progressBar);
 
         Bundle info = getIntent().getExtras();
         String name = info.getString("username");
         String email = info.getString("user_email");
-
+        getRating(name);
         navUsername.setText(name);
         navEmail.setText(email);
 
+    }
+    public void getRating(final String staffname){
+        NavigationView navigationView=findViewById(R.id.nav_view);
+        View headerView=navigationView.getHeaderView(0);
+        progressBar=headerView.findViewById(R.id.progressBar);
+        Rating=headerView.findViewById(R.id.Rating);
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray ja = new JSONArray(response);
+                    for (int i = 0; i < ja.length(); i++) {
+                        JSONObject jo = ja.getJSONObject(i);
+                        String rating = jo.getString("ORDER_RATING");
+                        String count = jo.getString("COUNT");
+                        if (rating.equals("BAD")) {
+                            numThumbsdown = Integer.parseInt(count);
+
+                        } else if (rating.equals("GOOD")) {
+                            numThumbsUp = Integer.parseInt(count);
+                        }
+                    }
+                    if(numThumbsdown!=0 && numThumbsUp!=0){
+                        double total=numThumbsdown+numThumbsUp;
+                        double progress=Math.round((numThumbsUp/total)*100);
+                        progressBar.setProgress((int)progress);
+                    }else{
+                        progressBar.setProgress(0);
+                    }
+                    Rating.setText("Good: "+ numThumbsUp+"\nBad: "+numThumbsdown);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(StaffHome.this,"Error setting Rating",Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params= new HashMap<>();
+                params.put("ORDER_CREATOR",staffname);
+                return params;
+            }
+        };
+        RequestQueue requestQueue= Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 
     @Override

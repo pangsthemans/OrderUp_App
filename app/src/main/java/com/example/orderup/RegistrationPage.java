@@ -203,7 +203,6 @@ public class RegistrationPage extends AppCompatActivity {
                 params.put("USER_PASSWORD",password);
                 params.put("USER_TYPE", Integer.toString(usertype));
                 return params;
-
             }
         };
         RequestQueue requestQueue= Volley.newRequestQueue(this);

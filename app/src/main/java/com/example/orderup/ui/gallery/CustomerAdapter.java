@@ -172,7 +172,6 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
             String message=jsonObject.getString("message");
             if(success.equals("1")){
                 Toast.makeText(mcontext,"Thank You for Your Feedback",Toast.LENGTH_SHORT).show();
-
             }
             else if(success.equals("0")){
                 Toast.makeText(mcontext,message,Toast.LENGTH_SHORT).show();
