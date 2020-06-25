@@ -73,6 +73,7 @@
         android:id="@+id/Rating"
         android:layout_width="76dp"
         android:layout_height="20dp"
+        android:gravity="center"
         android:text="Rating"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
