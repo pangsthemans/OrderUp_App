@@ -6,30 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".RegistrationPage"
     android:background="@drawable/gradient_background">
-    
-    <Button
-        android:id="@+id/StaffBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Staff Home Page"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.881"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.932" />
-
-    <Button
-        android:id="@+id/btn_CustomerHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Customer Page"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.161"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.932" />
 
     <ImageView
         android:id="@+id/imageView3"

@@ -28,8 +28,7 @@ import java.util.regex.Pattern;
 
 public class RegistrationPage extends AppCompatActivity {
 
-    private Button Staff;
-    private Button Customer;
+
     private RadioButton StaffRadio;
     private RadioButton CustRadio;
     private Button ConfirmRegis;
@@ -52,8 +51,7 @@ public class RegistrationPage extends AppCompatActivity {
         emailAd=findViewById(R.id.txt_email);
         reenterPassword=findViewById(R.id.txt_reEnterPassword);
         Username=findViewById(R.id.txt_username_regis);
-        Customer= findViewById(R.id.btn_CustomerHome);
-        Staff = findViewById(R.id.StaffBtn);
+
         StaffRadio = findViewById(R.id.radioStaff);
         CustRadio = findViewById(R.id.radioCustomer);
 
@@ -113,19 +111,6 @@ public class RegistrationPage extends AppCompatActivity {
             }
         });
 
-        Customer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openCustomerHome("Customer","admin@gmail.com");
-            }
-        });
-
-        Staff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openStaffHome("Staff","admin@gmail.com");
-            }
-        });
     }// end of onCreate method
 
 
