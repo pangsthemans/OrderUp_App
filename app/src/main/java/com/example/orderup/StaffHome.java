@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -93,6 +94,8 @@ public class StaffHome extends AppCompatActivity {
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = headerView.findViewById(R.id.nav_username);
         TextView navEmail = headerView.findViewById(R.id.nav_email);
+        TextView Rating = headerView.findViewById(R.id.Rating);
+        ProgressBar progressBar = headerView.findViewById(R.id.progressBar);
 
         Bundle info = getIntent().getExtras();
         String name = info.getString("username");
