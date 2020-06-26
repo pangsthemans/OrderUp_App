@@ -30,9 +30,10 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="257dp"
-        android:layout_height="45dp"
+        android:layout_width="315dp"
+        android:layout_height="42dp"
         android:fontFamily="serif-monospace"
+        android:gravity="center"
         android:text="Make an Order"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
