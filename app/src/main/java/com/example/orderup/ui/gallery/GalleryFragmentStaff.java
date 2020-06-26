@@ -107,6 +107,9 @@ public class GalleryFragmentStaff extends Fragment {
             String ordTime = jo.getString("ORDER_TIME");
             String ordStatus = jo.getString("ORDER_STATUS");
             String orderowner=jo.getString("ORDER_OWNER_NAME");
+            //THIS IS ME RETURNING THE RESTAURANT
+            String restaurant=jo.getString("REST_NAME");
+
             OrderNum.add("Order Number: #"+ordNum);
             OrderCreators.add("Created by: "+creator);
             OrderCreationTime.add("Created at: " + ordTime);
