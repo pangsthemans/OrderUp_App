@@ -149,7 +149,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
 
             AlertDialog.Builder d = new AlertDialog.Builder(mcontext);
             d.setTitle("Give Your Order A Rating!");
-            d.setSingleChoiceItems(updateoptions, 0, new DialogInterface.OnClickListener() {
+            d.setSingleChoiceItems(updateoptions, -1, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     selectUpdate = updateoptions[which];
