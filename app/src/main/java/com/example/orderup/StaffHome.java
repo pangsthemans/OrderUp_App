@@ -125,6 +125,7 @@ public class StaffHome extends AppCompatActivity {
         navEmail.setText(email);
 
     }
+    //THis method gets the rating for that specific staff member and changes the global variables created above
     public void getRating(final String staffname){
         NavigationView navigationView=findViewById(R.id.nav_view);
         View headerView=navigationView.getHeaderView(0);
