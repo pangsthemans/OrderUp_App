@@ -40,10 +40,10 @@
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.341"
+                app:layout_constraintHorizontal_bias="0.268"
                 app:layout_constraintStart_toEndOf="@+id/restaurant"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.045" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/OrderCreator"
@@ -53,10 +53,23 @@
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.15"
+                app:layout_constraintHorizontal_bias="0.112"
                 app:layout_constraintStart_toEndOf="@+id/restaurant"
                 app:layout_constraintTop_toBottomOf="@+id/OrderNumber"
-                app:layout_constraintVertical_bias="0.128" />
+                app:layout_constraintVertical_bias="0.439" />
+
+            <TextView
+                android:id="@+id/OrderOwner"
+                android:layout_width="177dp"
+                android:layout_height="24dp"
+                android:text="Order Owner"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/OrderCreator"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toEndOf="@+id/restaurant"
+                app:layout_constraintTop_toBottomOf="@+id/OrderNumber"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/CreateTime"
@@ -65,10 +78,10 @@
                 android:text="Creation Time"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.071"
+                app:layout_constraintHorizontal_bias="0.053"
                 app:layout_constraintStart_toEndOf="@+id/restaurant"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.677" />
+                app:layout_constraintVertical_bias="0.801" />
 
             <TextView
                 android:id="@+id/OrderStatus"
@@ -77,10 +90,10 @@
                 android:text="Order Status"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.067"
+                app:layout_constraintHorizontal_bias="0.05"
                 app:layout_constraintStart_toEndOf="@+id/restaurant"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.867" />
+                app:layout_constraintVertical_bias="1.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

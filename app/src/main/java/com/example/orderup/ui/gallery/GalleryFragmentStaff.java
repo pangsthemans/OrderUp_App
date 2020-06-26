@@ -35,6 +35,7 @@ public class GalleryFragmentStaff extends Fragment {
     ArrayList<String> OrderCreators;
     ArrayList<String> OrderCreationTime;
     ArrayList<String> OrderStatus;
+    ArrayList<String> OrderOwner;
     String url="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/getordersnew.php";
     private GalleryViewModel galleryViewModel;
 
@@ -46,25 +47,26 @@ public class GalleryFragmentStaff extends Fragment {
         View root = inflater.inflate(R.layout.fragment_staff_gallery, container, false);
         recyclerView = root.findViewById(R.id.recycle);
 
-        FloatingActionButton fab = root.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                staffAdapter = new StaffAdapter(getActivity(),OrderNum,OrderCreators, OrderCreationTime, OrderStatus);
-//                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//                recyclerView.setAdapter(staffAdapter);
-//                staffAdapter.notifyDataSetChanged();
-                addorders();
-                Snackbar.make(view, "Refreshed", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = root.findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                staffAdapter = new StaffAdapter(getActivity(),OrderNum,OrderCreators, OrderCreationTime, OrderStatus);
+////                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+////                recyclerView.setAdapter(staffAdapter);
+////                staffAdapter.notifyDataSetChanged();
+//                addorders();
+//                Snackbar.make(view, "Refreshed", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
 //        circlebutton = root.findViewById(R.id.fab);
         OrderNum = new ArrayList<>();
         OrderCreators = new ArrayList<>();
         OrderCreationTime = new ArrayList<>();
         OrderStatus = new ArrayList<>();
+        OrderOwner= new ArrayList<>();
         //This method adds orders from the orders database to the orders table
         addorders();
 
@@ -104,16 +106,17 @@ public class GalleryFragmentStaff extends Fragment {
             String ordNum=jo.getString("ORDER_ID");
             String ordTime = jo.getString("ORDER_TIME");
             String ordStatus = jo.getString("ORDER_STATUS");
+            String orderowner=jo.getString("ORDER_OWNER_NAME");
             OrderNum.add("Order Number: #"+ordNum);
             OrderCreators.add("Created by: "+creator);
             OrderCreationTime.add("Created at: " + ordTime);
             OrderStatus.add("Status: " + ordStatus);
-
+            OrderOwner.add("Belongs to: "+orderowner);
         }
 //        recyclerView.removeAllViews();
 //        staffAdapter.notifyItemRangeRemoved(0,OrderNum.size());
         //Over here should be an error, need to add new Arraylists to the constructor first creation time then status
-        staffAdapter = new StaffAdapter(getActivity(),OrderNum,OrderCreators, OrderCreationTime, OrderStatus);
+        staffAdapter = new StaffAdapter(getActivity(),OrderNum,OrderCreators, OrderCreationTime, OrderStatus,OrderOwner);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(staffAdapter);
 
