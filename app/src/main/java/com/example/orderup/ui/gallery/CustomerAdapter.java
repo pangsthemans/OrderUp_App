@@ -38,12 +38,13 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
     private ArrayList<String> OrderTime;
     private ArrayList<String> OrderStats;
     private ArrayList<String> OrderOwners;
+    private ArrayList<String> Restaurants;
     private Context mcontext;
     private String selectUpdate;
     public String url="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/changeOrderRating.php";
 
 
-    public CustomerAdapter(Context context, ArrayList<String> ON, ArrayList<String> OrderC, ArrayList<String> OrderCreateTime, ArrayList<String> OrderStatus,ArrayList<String> OrderOwner){
+    public CustomerAdapter(Context context, ArrayList<String> ON, ArrayList<String> OrderC, ArrayList<String> OrderCreateTime, ArrayList<String> OrderStatus,ArrayList<String> OrderOwner, ArrayList<String> Restaurant){
         this.layoutInflater = LayoutInflater.from(context);
         OrderNumbers = ON;
         OrderOwners=OrderOwner;
@@ -51,6 +52,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
         mcontext=context;
         OrderTime = OrderCreateTime;
         OrderStats = OrderStatus;
+        Restaurants = Restaurant;
     }
 
     @NonNull
@@ -85,6 +87,28 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
         String OrderStatus = OrderStats.get(position);
         holder.OrderStatus.setText(OrderStatus);
 
+
+        //Bind the restaurant image
+        String restaurant = Restaurants.get(position);
+        if(restaurant.equals("KFC")){
+            holder.RestaurantImage.setImageResource(R.drawable.kfc);
+        }
+        else if(restaurant.equals("Steers")){
+            holder.RestaurantImage.setImageResource(R.drawable.steers);
+        }
+        else if(restaurant.equals("RoccoMamas")){
+            holder.RestaurantImage.setImageResource(R.drawable.rocomama);
+        }
+        else if(restaurant.equals("Romans Pizza")){
+            holder.RestaurantImage.setImageResource(R.drawable.romans);
+        }
+        else if(restaurant.equals("Macdonalds")){
+            holder.RestaurantImage.setImageResource(R.drawable.mcd);
+        }
+        else{
+            holder.UnknownRest.setText(restaurant);
+        }
+
     }
 
     @Override
@@ -94,8 +118,8 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView OrderNumber, OrderCreator, CreationTime, OrderStatus,OrderOwner;
-        ImageView imageView;
+        TextView OrderNumber, OrderCreator, CreationTime, OrderStatus,OrderOwner, UnknownRest;
+        ImageView RestaurantImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -111,10 +135,11 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
 
             OrderNumber = itemView.findViewById(R.id.OrderNumber);
             OrderCreator = itemView.findViewById(R.id.OrderCreator);
-            imageView = itemView.findViewById(R.id.restaurant);
+            RestaurantImage = itemView.findViewById(R.id.restaurant);
             CreationTime = itemView.findViewById(R.id.CreateTime);
             OrderStatus = itemView.findViewById(R.id.OrderStatus);
             OrderOwner= itemView.findViewById(R.id.OrderOwner);
+            UnknownRest = itemView.findViewById(R.id.UnkownRest);
         }
 
 

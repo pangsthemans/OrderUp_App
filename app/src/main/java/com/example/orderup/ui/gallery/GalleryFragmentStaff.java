@@ -36,6 +36,7 @@ public class GalleryFragmentStaff extends Fragment {
     ArrayList<String> OrderCreationTime;
     ArrayList<String> OrderStatus;
     ArrayList<String> OrderOwner;
+    ArrayList<String> Restaurants;
     String url="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/getordersnew.php";
     private GalleryViewModel galleryViewModel;
 
@@ -67,6 +68,7 @@ public class GalleryFragmentStaff extends Fragment {
         OrderCreationTime = new ArrayList<>();
         OrderStatus = new ArrayList<>();
         OrderOwner= new ArrayList<>();
+        Restaurants = new ArrayList<>();
         //This method adds orders from the orders database to the orders table
         addorders();
 
@@ -115,11 +117,12 @@ public class GalleryFragmentStaff extends Fragment {
             OrderCreationTime.add("Created at: " + ordTime);
             OrderStatus.add("Status: " + ordStatus);
             OrderOwner.add("Belongs to: "+orderowner);
+            Restaurants.add(restaurant);
         }
 //        recyclerView.removeAllViews();
 //        staffAdapter.notifyItemRangeRemoved(0,OrderNum.size());
         //Over here should be an error, need to add new Arraylists to the constructor first creation time then status
-        staffAdapter = new StaffAdapter(getActivity(),OrderNum,OrderCreators, OrderCreationTime, OrderStatus,OrderOwner);
+        staffAdapter = new StaffAdapter(getActivity(),OrderNum,OrderCreators, OrderCreationTime, OrderStatus,OrderOwner, Restaurants);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(staffAdapter);
 
