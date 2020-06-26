@@ -1,6 +1,7 @@
 package com.example.orderup.ui.gallery;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class GalleryFragmentStaff extends Fragment {
@@ -109,6 +111,7 @@ public class GalleryFragmentStaff extends Fragment {
             String ordTime = jo.getString("ORDER_TIME");
             String ordStatus = jo.getString("ORDER_STATUS");
             String orderowner=jo.getString("ORDER_OWNER_NAME");
+//            Log.d("TEST","HIS NAME"+orderowner);
             //THIS IS ME RETURNING THE RESTAURANT
             String restaurant=jo.getString("REST_NAME");
 
@@ -118,6 +121,9 @@ public class GalleryFragmentStaff extends Fragment {
             OrderStatus.add("Status: " + ordStatus);
             OrderOwner.add("Belongs to: "+orderowner);
             Restaurants.add(restaurant);
+        }
+        for(String name:OrderOwner){
+        Log.d("TEST","THIS is your array list: "+name );
         }
 //        recyclerView.removeAllViews();
 //        staffAdapter.notifyItemRangeRemoved(0,OrderNum.size());

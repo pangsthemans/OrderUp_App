@@ -38,6 +38,6 @@
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.example.orderup.ui.slideshow.SlideshowFragment"
-        android:label="History"
+        android:label="TBD"
         tools:layout="@layout/fragment_slideshow" />
 </navigation>

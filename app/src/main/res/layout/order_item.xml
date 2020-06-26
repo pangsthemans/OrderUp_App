@@ -34,7 +34,7 @@
 
             <TextView
                 android:id="@+id/OrderNumber"
-                android:layout_width="216dp"
+                android:layout_width="wrap_content"
                 android:layout_height="29dp"
                 android:text="Order Number: "
                 android:textSize="20sp"
@@ -47,7 +47,7 @@
 
             <TextView
                 android:id="@+id/OrderCreator"
-                android:layout_width="177dp"
+                android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:text="Order Creator"
                 android:textSize="18sp"
@@ -60,7 +60,7 @@
 
             <TextView
                 android:id="@+id/OrderOwner"
-                android:layout_width="177dp"
+                android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:text="Order Owner"
                 android:textSize="18sp"
