@@ -37,14 +37,16 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
     private ArrayList<String> OrderCreators;
     private ArrayList<String> OrderTime;
     private ArrayList<String> OrderStats;
+    private ArrayList<String> OrderOwners;
     private Context mcontext;
     private String selectUpdate;
     public String url="https://lamp.ms.wits.ac.za/home/s2039033/ProjectLori/changeOrderRating.php";
 
 
-    public CustomerAdapter(Context context, ArrayList<String> ON, ArrayList<String> OrderC, ArrayList<String> OrderCreateTime, ArrayList<String> OrderStatus){
+    public CustomerAdapter(Context context, ArrayList<String> ON, ArrayList<String> OrderC, ArrayList<String> OrderCreateTime, ArrayList<String> OrderStatus,ArrayList<String> OrderOwner){
         this.layoutInflater = LayoutInflater.from(context);
         OrderNumbers = ON;
+        OrderOwners=OrderOwner;
         OrderCreators = OrderC;
         mcontext=context;
         OrderTime = OrderCreateTime;
@@ -76,6 +78,9 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
         String OrderT = OrderTime.get(position);
         holder.CreationTime.setText(OrderT);
 
+        String oOwner=OrderOwners.get(position);
+        holder.OrderOwner.setText(oOwner);
+
         //Bind the order status
         String OrderStatus = OrderStats.get(position);
         holder.OrderStatus.setText(OrderStatus);
@@ -89,7 +94,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView OrderNumber, OrderCreator, CreationTime, OrderStatus;;
+        TextView OrderNumber, OrderCreator, CreationTime, OrderStatus,OrderOwner;
         ImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {
@@ -109,6 +114,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
             imageView = itemView.findViewById(R.id.restaurant);
             CreationTime = itemView.findViewById(R.id.CreateTime);
             OrderStatus = itemView.findViewById(R.id.OrderStatus);
+            OrderOwner= itemView.findViewById(R.id.OrderOwner);
         }
 
 

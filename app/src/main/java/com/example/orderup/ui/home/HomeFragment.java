@@ -40,6 +40,7 @@ public class HomeFragment extends Fragment {
     ArrayList<String> OrderName;
     ArrayList<String> OrderCreationTime;
     ArrayList<String> OrderStatus;
+    ArrayList<String> OrderCreator;
     CustomerAdapter adapter;
     Bundle info;
     RecyclerView recyclerView;
@@ -65,6 +66,7 @@ public class HomeFragment extends Fragment {
         OrderCreationTime = new ArrayList<>();
         OrderName=new ArrayList<>();
         OrderStatus = new ArrayList<>();
+        OrderCreator=new ArrayList<>();
         addorders(username);
 
         return root;
@@ -107,17 +109,19 @@ public class HomeFragment extends Fragment {
 
         for(int i=0;i<ja.length();i++){
             JSONObject jo=ja.getJSONObject(i);
-            String name=jo.getString("ORDER_OWNER_NAME");
+            String ordname=jo.getString("ORDER_OWNER_NAME");
             String ordNum=jo.getString("ORDER_ID");
             String ordTime = jo.getString("ORDER_TIME");
             String ordStatus = jo.getString("ORDER_STATUS");
+            String ordCreate=jo.getString("ORDER_CREATOR");
             OrderNumber.add("Order Number: #"+ordNum);
-            OrderName.add(name);
+            OrderName.add("Belongs to: "+ordname);
+            OrderCreator.add("Created by: "+ordCreate);
             OrderCreationTime.add("Created at: " + ordTime);
             OrderStatus.add("Status: " + ordStatus);
         }
         //Over here should be an error, need to add new Arraylists to the constructor first creation time then status
-        adapter = new CustomerAdapter(getActivity(),OrderNumber,OrderName, OrderCreationTime, OrderStatus);
+        adapter = new CustomerAdapter(getActivity(),OrderNumber,OrderCreator, OrderCreationTime, OrderStatus,OrderName);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
     }
