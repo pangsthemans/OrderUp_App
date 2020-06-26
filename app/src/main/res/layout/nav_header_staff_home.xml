@@ -19,15 +19,15 @@
         style="?android:progressBarStyleHorizontal"
         android:layout_width="70dp"
         android:layout_height="64dp"
-        android:rotation="270"
         android:progress="75"
         android:progressDrawable="@drawable/progress_bar"
+        android:rotation="270"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.779"
+        app:layout_constraintHorizontal_bias="0.859"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.234" />
+        app:layout_constraintVertical_bias="0.232" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -73,12 +73,13 @@
         android:id="@+id/Rating"
         android:layout_width="82dp"
         android:layout_height="40dp"
+        android:gravity="center"
         android:text="Rating"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.803"
+        app:layout_constraintHorizontal_bias="0.89"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.854" />
+        app:layout_constraintVertical_bias="0.845" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
