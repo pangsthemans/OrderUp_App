@@ -147,8 +147,9 @@ public class StaffHome extends AppCompatActivity {
                             numThumbsUp = Integer.parseInt(count);
                         }
                     }
-                    if(numThumbsdown!=0 && numThumbsUp!=0){
-                        double total=numThumbsdown+numThumbsUp;
+                    double total=numThumbsdown+numThumbsUp;
+                    if(total != 0){
+
                         double progress=Math.round((numThumbsUp/total)*100);
                         progressBar.setProgress((int)progress);
                     }else{
